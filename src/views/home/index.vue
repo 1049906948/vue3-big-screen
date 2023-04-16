@@ -6,14 +6,16 @@
           <div @click="handleUrl('/Screen')">大屏展示</div>
         </div>
         <div class="item">
-
+          <div @click="handleStart()">开始</div>
         </div>
-        <div class="item"></div>
+        <div class="item">
+          <div @click="handleEnd()">结束</div>
+        </div>
         <div class="item"></div>
       </div>
 
     <div class="test">
-      <el-progress type="circle" :percentage="25" />
+      <el-progress type="circle" :percentage="parseInt(fake.progress*100)" />
     </div>
 
 
@@ -21,11 +23,53 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+// import Fakeprogress from 'fake-progress'
+// export default {
+//   data(){
+//     return{
+//       fake:new Fakeprogress({
+//         timeConstant: 60000,
+//         autoStart : true
+//       })
+//     }
+//   },
+//   created() {
+//
+//   },
+//   methods:{
+//     handleUrl(){
+//
+//     },
+//     handleStart(){
+//       this.fake.start()
+//     },
+//     handleEnd(){
+//       this.fake.end()
+//     }
+//   }
+// }
 
-import {useRouter} from 'vue-router'
+import {useRouter} from 'vue-router';
+import Fakeprogress from 'fake-progress'
+import { onMounted, onBeforeMount, ref, watch } from 'vue';
 const router=useRouter()
-function handleUrl(url:string){
+
+const time = new Fakeprogress({
+  timeConstant : 60000,
+  autoStart : true
+});
+const fake = ref(time);
+
+function handleStart(){
+  fake.value.start()
+}
+
+function handleEnd(){
+  fake.value.end()
+}
+
+function handleUrl(url){
   router.push(url)
   console.log(12)
 }
