@@ -12,7 +12,6 @@
         <div class="item"></div>
       </div>
 
-123
     <div class="test">
       <el-progress type="circle" :percentage="25" />
     </div>
