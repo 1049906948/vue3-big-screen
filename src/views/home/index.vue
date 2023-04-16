@@ -14,6 +14,19 @@
         <div class="item"></div>
       </div>
 
+      <div class="box">
+        <div class="item">
+          <div @click="handleUrl('/Screen')">大屏展示</div>
+        </div>
+        <div class="item">
+          <div @click="handleStart()">开始</div>
+        </div>
+        <div class="item">
+          <div @click="handleEnd()">结束</div>
+        </div>
+        <div class="item"></div>
+      </div>
+
     <div class="test">
       <el-progress type="circle" :percentage="parseInt(fake.progress*100)" />
     </div>
@@ -56,7 +69,7 @@ import { onMounted, onBeforeMount, ref, watch } from 'vue';
 const router=useRouter()
 
 const time = new Fakeprogress({
-  timeConstant : 60000,
+  timeConstant : 10000,
   autoStart : true
 });
 const fake = ref(time);
@@ -86,7 +99,8 @@ function handleUrl(url){
    background: #55a532;
    width: 1200px;
    margin: 0 auto;
-  display: flex;
+   display: flex;
+    margin-top: 20px;
    .item{
      background: #3de7c9;
      width: 25%;
