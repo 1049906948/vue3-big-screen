@@ -3,9 +3,11 @@
 
       <div class="box">
         <div class="item">
-          <div @click="handleUrl">大屏展示</div>
+          <div @click="handleUrl('/Screen')">大屏展示</div>
         </div>
-        <div class="item"></div>
+        <div class="item">
+
+        </div>
         <div class="item"></div>
         <div class="item"></div>
       </div>
@@ -16,8 +18,8 @@
 
 import {useRouter} from 'vue-router'
 const router=useRouter()
-function handleUrl(){
-  router.push("/Screen")
+function handleUrl(url:string){
+  router.push(url)
   console.log(12)
 }
 </script>
