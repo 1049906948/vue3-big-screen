@@ -11,6 +11,14 @@
         <div class="item"></div>
         <div class="item"></div>
       </div>
+
+
+    <div class="test">
+      <el-progress type="circle" :percentage="25" />
+    </div>
+
+
+
   </div>
 </template>
 
@@ -25,6 +33,12 @@ function handleUrl(url:string){
 </script>
 
 <style lang="scss" scoped>
+.test{
+  //background: #55a532;
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 80px;
+}
 .box{
    background: #55a532;
    width: 1200px;
