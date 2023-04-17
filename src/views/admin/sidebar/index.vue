@@ -16,7 +16,7 @@
       </div>
 
       <div class="menu-wrapper">
-
+<!--        <menubar-item v-for='v in filterMenubarData' :key='v.path' :index='v.path' :menu-list='v' />-->
       </div>
 
     </el-menu>
@@ -24,8 +24,35 @@
 </template>
 
 <script lang="ts" setup>
+import MenubarItem from './menubarItem.vue'
 import { ref } from 'vue'
+import { useLayoutStore } from '@/store/modules/layout'
+const { getMenubar, setRoutes, changeCollapsed, getSetting } = useLayoutStore()
+
 const isCollapse = ref(false)
+// 过滤隐藏的菜单，并提取单条的子菜单
+// const filterMenubar = (menuList:IMenubarList[]) => {
+//   const f = (menuList:IMenubarList[]) => {
+//     let arr:IMenubarList[] = []
+//     menuList.filter(v => !v.meta.hidden).forEach(v => {
+//       let child = v.children && v.children.filter(v => !v.meta.hidden)
+//       let currentItem = v
+//       if(!v.meta.alwaysShow && child && child.length === 1) {
+//         [currentItem] = child
+//       }
+//       arr.push(currentItem)
+//       if(currentItem.children && currentItem.children.length > 0) {
+//         arr[arr.length - 1].children = f(currentItem.children)
+//       }
+//     })
+//     return arr
+//   }
+//   return f(menuList)
+// }
+
+
+
+const filterMenubarData = filterMenubar(getMenubar.menuList)
 
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)

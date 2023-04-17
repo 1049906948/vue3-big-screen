@@ -9,6 +9,7 @@ specifiers:
   echarts: ^5.4.0
   element-plus: ^2.3.3
   fake-progress: ^1.0.4
+  pinia: ^2.0.11
   rollup-plugin-visualizer: ^5.8.3
   sass: ^1.55.0
   sass-loader: ^13.1.0
@@ -25,6 +26,7 @@ dependencies:
   echarts: 5.4.2
   element-plus: 2.3.3_vue@3.2.47
   fake-progress: 1.0.4
+  pinia: 2.0.34_typescript@4.9.5+vue@3.2.47
   vue: 3.2.47
   vue-router: 4.1.6_vue@3.2.47
 
@@ -912,6 +914,24 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
     dev: true
+
+  /pinia/2.0.34_typescript@4.9.5+vue@3.2.47:
+    resolution: {integrity: sha512-cgOoGUiyqX0SSgX8XelK9+Ri4XA2/YyNtgjogwfzIx1g7iZTaZPxm7/bZYMCLU2qHRiHhxG7SuQO0eBacFNc2Q==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.5.0
+      typescript: 4.9.5
+      vue: 3.2.47
+      vue-demi: 0.14.0_vue@3.2.47
+    dev: false
 
   /postcss/8.4.22:
     resolution: {integrity: sha512-XseknLAfRHzVWjCEtdviapiBtfLdgyzExD50Rg2ePaucEesyh8Wv4VPdW0nbyDa1ydbrAxV19jvMT4+LFmcNUA==}
