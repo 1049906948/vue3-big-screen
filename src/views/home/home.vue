@@ -16,7 +16,7 @@
 
     <div class="box">
       <div class="item">
-        <div @click="handleUrl('/Screen')">大屏展示</div>
+          12313
       </div>
       <div class="item">
         <div @click="handleStart()">开始</div>
@@ -24,7 +24,11 @@
       <div class="item">
         <div @click="handleEnd()">结束</div>
       </div>
-      <div class="item"></div>
+      <div class="item">
+        <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
+          github
+        </a>
+      </div>
     </div>
 
     <div class="test">
