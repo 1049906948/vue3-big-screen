@@ -13,7 +13,7 @@
 
 <script lang="ts">
 export default {
-  name: "ckLoding"
+  name: "ckLoading"
 };
 </script>
 
@@ -23,7 +23,7 @@ const loading = ref(true);
 onMounted(() => {
   setTimeout(() => {
     loading.value = false;
-  }, 2000);
+  }, 500);
 })
 </script>
 
