@@ -11,7 +11,7 @@
         <div class="item">
           <div @click="handleEnd()">结束</div>
         </div>
-        <div class="item"></div>
+        <div class="item" @click="handleUrl('/admin')">管理系统</div>
       </div>
 
       <div class="box">
