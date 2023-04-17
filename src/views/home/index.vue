@@ -1,9 +1,9 @@
 <template>
   <ckLoading>
     <ckHome></ckHome>
-    </ckLoading>
+  </ckLoading>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import ckHome from './home.vue';
 </script>
