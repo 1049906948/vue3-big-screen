@@ -1,5 +1,5 @@
 <template>
-  <div class="screen-container">
+  <div class="screen-content" ref="screenRef">
     <div v-if="loading" class="mask flex-c">
       <dv-loading>
         <span class="loading-title">加载中...</span>
@@ -19,6 +19,8 @@ export default {
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
+import windowResize from "@/utils/resize";
+const { screenRef, calcRate, windowDraw, unWindowDraw } = windowResize()
 const loading = ref(true);
 onMounted(() => {
   setTimeout(() => {

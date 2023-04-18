@@ -24,10 +24,10 @@
 </template>
 
 <script lang="ts" setup>
-import MenubarItem from './menubarItem.vue'
+// import MenubarItem from './menubarItem.vue'
 import { ref } from 'vue'
-import { useLayoutStore } from '@/store/modules/layout'
-const { getMenubar, setRoutes, changeCollapsed, getSetting } = useLayoutStore()
+// import { useLayoutStore } from '@/store/modules/layout'
+// const { getMenubar, setRoutes, changeCollapsed, getSetting } = useLayoutStore()
 
 const isCollapse = ref(false)
 // 过滤隐藏的菜单，并提取单条的子菜单
@@ -52,13 +52,17 @@ const isCollapse = ref(false)
 
 
 
-const filterMenubarData = filterMenubar(getMenubar.menuList)
+// const filterMenubarData = filterMenubar(getMenubar.menuList)
 
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 
 const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+
+const handleCollapse = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 </script>

@@ -1,14 +1,15 @@
 <template>
   <ckLoading>
       <div class="ck-wapper">
-         <sidebal></sidebal>
+<!--         <sidebal></sidebal>-->
+        1231
       </div>
   </ckLoading>
 </template>
 
 
 <script lang="ts" setup>
-import sidebal from "./sidebar/index.vue"
+// import sidebal from "./sidebar/index.vue"
 </script>
 
 <style lang="scss" scoped>
