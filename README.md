@@ -11,6 +11,7 @@
 - 项目已经适配移动端H5，有兴趣的朋友可以点击这里[传送门](https://gitee.com/xiaoxiang_reincarnation/vue3-big-screen-mobile.git)。
 - 项目中注释了图片压缩vite插件，如需对图片进行压缩可自行安装vite-plugin-imagemin插件 
   ```npm i vite-plugin-imagemin -D 或者 cnpm i vite-plugin-imagemin -D```
+- https://github.com/hsiangleev/element-plus-admin
 ### 项目截图
 ![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/big-screen_2m.gif)
 

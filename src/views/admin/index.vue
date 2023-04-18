@@ -1,25 +1,27 @@
 <template>
-  <div class="ck-container">
-
-    <div v-if="loading" class="mask flex-c">
-      <dv-loading>
-        <span class="loading-title">加载中...</span>
-      </dv-loading>
-    </div>
-
-  </div>
+  <ckLoading>
+      <div class="ck-wapper">
+<!--         <sidebal></sidebal>-->
+        1231
+      </div>
+  </ckLoading>
 </template>
 
-<script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
-const loading = ref(true);
-onMounted(() => {
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
-})
+
+<script lang="ts" setup>
+// import sidebal from "./sidebar/index.vue"
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.el-menu{
+  border-right:none;
+}
+
+.ck-wapper{
+  background: #ffffff;
+  width: 100vw;
+  height: 100vh;
+}
 
 </style>
+
