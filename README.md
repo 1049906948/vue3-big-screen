@@ -12,6 +12,7 @@
 - 项目中注释了图片压缩vite插件，如需对图片进行压缩可自行安装vite-plugin-imagemin插件 
   ```npm i vite-plugin-imagemin -D 或者 cnpm i vite-plugin-imagemin -D```
 - https://github.com/hsiangleev/element-plus-admin
+- https://learnjava.baimuxym.cn/pages/%E5%88%A9%E7%94%A8github%E9%A1%B9%E7%9B%AE%E5%85%8D%E8%B4%B9%E7%94%B3%E8%AF%B7IDEA%E6%BF%80%E6%B4%BB%E7%A0%81/
 ### 项目截图
 ![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/big-screen_2m.gif)
 

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-import { login, loginParam, getRouterList, getUser } from '/@/api/layout/index'
-import { ILayout, IMenubarStatus, ITagsList, IMenubarList, ISetting, IMenubar, IStatus, ITags, IUserInfo } from '/@/type/store/layout'
-import router from '/@/router/index'
-import { allowRouter } from '/@/router/index'
-import { generatorDynamicRouter } from '/@/router/asyncRouter'
-import { setLocal, getLocal, decode } from '/@/utils/tools'
+import { login, loginParam, getRouterList, getUser } from '@/api/layout/index'
+import { ILayout, IMenubarStatus, ITagsList, IMenubarList, ISetting, IMenubar, IStatus, ITags, IUserInfo } from '@/type/store/layout'
+import router from '@/router/router'
+// import { allowRouter } from '@/router/router'
+import { generatorDynamicRouter } from '@/router/asyncRouter'
+import { setLocal, getLocal, decode } from '@/utils/tools'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 
 const setting = getLocal<ISetting>('setting')
@@ -166,7 +166,7 @@ export const useLayoutStore = defineStore({
             this.menubar.menuList = data
         },
         concatAllowRoutes():void {
-            allowRouter.reverse().forEach(v => this.menubar.menuList.unshift(v))
+            // allowRouter.reverse().forEach(v => this.menubar.menuList.unshift(v))
         },
         // 修改主题
         changeTheme(num?:number):void {
