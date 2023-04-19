@@ -5,7 +5,7 @@ import { useLayoutStore } from '@/store/modules/layout'
 // 动态路由名称映射表
 const modules = import.meta.glob('../views/**/**.vue')
 const components:IObject<() => Promise<typeof import('*.vue')>> = {
-    Layout: (() => import('/@/layout/index.vue')) as unknown as () => Promise<typeof import('*.vue')>
+    Layout: (() => import('@/layout/index.vue')) as unknown as () => Promise<typeof import('*.vue')>
 }
 Object.keys(modules).forEach(key => {
     const nameMatch = key.match(/^\.\.\/views\/(.+)\.vue/)
