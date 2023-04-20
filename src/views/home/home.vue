@@ -30,21 +30,7 @@
 
     <div class="box">
       <el-row :gutter="12">
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/Screen')">大屏展示</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleStart()">开始</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleEnd()">结束</div>
-          </el-card>
-        </el-col>
+
         <el-col :span="6">
           <el-card class="item" shadow="always">
             <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
