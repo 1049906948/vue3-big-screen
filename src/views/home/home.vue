@@ -1,34 +1,44 @@
 <template>
   <div class="ck-container">
 
+
     <div class="box">
-      <div class="item">
-        <div @click="handleUrl('/Screen')">大屏展示</div>
-      </div>
-      <div class="item">
-        <div @click="handleStart()">开始</div>
-      </div>
-      <div class="item">
-        <div @click="handleEnd()">结束</div>
-      </div>
-      <div class="item" @click="handleUrl('/admin')">管理系统</div>
+
+      <el-row :gutter="12">
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div @click="handleUrl('/Screen')">大屏展示</div>
+          </el-card>
+        </el-col>
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div @click="handleStart()">开始</div>
+          </el-card>
+        </el-col>
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div @click="handleEnd()">结束</div>
+          </el-card>
+        </el-col>
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div class="item" @click="handleUrl('/admin')">管理系统</div>
+          </el-card>
+        </el-col>
+      </el-row>
     </div>
 
     <div class="box">
-      <div class="item">
-          12313
-      </div>
-      <div class="item">
-        <div @click="handleStart()">开始</div>
-      </div>
-      <div class="item">
-        <div @click="handleEnd()">结束</div>
-      </div>
-      <div class="item">
-        <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
-          github
-        </a>
-      </div>
+      <el-row :gutter="12">
+
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
+              github
+            </a>
+          </el-card>
+        </el-col>
+      </el-row>
     </div>
 
     <div class="test">
@@ -99,20 +109,19 @@ function handleUrl(url){
   margin: 0 auto;
   margin-top: 80px;
 }
-.box{
-  background: #55a532;
+.box {
   width: 1200px;
   margin: 0 auto;
-  display: flex;
   margin-top: 20px;
-  .item{
-    background: #3de7c9;
-    width: 25%;
-    border: 1px solid red;
+
+  .item {
     text-align: center;
-    height: 50px;
+    cursor: pointer;
+    height: 100px;
     line-height: 50px;
-    cursor:pointer;
+    &:hover {
+      background: #3de7c9;
+    }
   }
 }
 </style>

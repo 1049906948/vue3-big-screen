@@ -46,5 +46,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.el-menu-item.is-active{
+  background: #409eff;
+  color: #ffffff;
+}
 </style>
