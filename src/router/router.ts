@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     name: 'admin',
     component: () => import('@/views/admin/index.vue')
+  },
+  {
+    path: '/tailwind',
+    name: 'tailwind',
+    component: () => import('@/views/tailwind/index.vue')
   }
 ]
 
