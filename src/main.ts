@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router/router";
 import DataVVue3 from "@kjgl77/datav-vue3";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import '@/assets/scss/tailwind/index.css';
 import '@/assets/scss/index.scss';
 import '@/assets/icon/iconfont.css';
 // 引入 全局注册组件
