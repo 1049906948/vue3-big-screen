@@ -87,7 +87,7 @@ import {useRouter} from 'vue-router';
 import Fakeprogress from 'fake-progress'
 import { onMounted, onBeforeMount, ref, watch } from 'vue';
 const router=useRouter()
-
+console.log(123123)
 const time = new Fakeprogress({
   timeConstant : 10000,
   autoStart : true
