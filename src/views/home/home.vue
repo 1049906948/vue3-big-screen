@@ -31,9 +31,16 @@
     <div class="box">
 
       <el-row :gutter="12">
+
         <el-col :span="6">
           <el-card class="item" shadow="always">
             <div class="item" @click="handleUrl('/tailwind')">tailwind</div>
+          </el-card>
+        </el-col>
+
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div class="item" @click="handleUrl('/web3')">web3</div>
           </el-card>
         </el-col>
 
