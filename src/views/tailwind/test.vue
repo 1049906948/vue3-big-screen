@@ -15,10 +15,10 @@
         </ul>
         <div class="flex relative">
           <div v-if="toggleMenu" class="text-white md:hidden cursor-pointer" @click="setToggleMenu(true)">
-            <el-icon><ArrowUpBold /></el-icon>
+            <el-icon><Fold /></el-icon>
           </div>
           <div v-else class="text-white md:hidden cursor-pointer" @click="setToggleMenu(false)">
-            <el-icon><ArrowDownBold /></el-icon>
+            <el-icon><Expand /></el-icon>
           </div>
           <ul v-if="!toggleMenu" class="z-10 fixed -top-0 -right-2 p-3 w-[70vw] h-screen shadow-2xl md:hidden list-none
             flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in">
