@@ -186,3 +186,6 @@ export function decode(url: string): string {
 export function encode(url: string): string {
     return encodeURIComponent(encodeURIComponent(url))
 }
+
+
+

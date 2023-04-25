@@ -46,6 +46,12 @@
 
         <el-col :span="6">
           <el-card class="item" shadow="always">
+            <div class="item" @click="handleUrl('/grid')">九宫格</div>
+          </el-card>
+        </el-col>
+
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
             <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
               github
             </a>
