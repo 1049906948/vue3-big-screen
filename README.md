@@ -14,6 +14,8 @@
 - https://github.com/hsiangleev/element-plus-admin
 - https://learnjava.baimuxym.cn/pages/%E5%88%A9%E7%94%A8github%E9%A1%B9%E7%9B%AE%E5%85%8D%E8%B4%B9%E7%94%B3%E8%AF%B7IDEA%E6%BF%80%E6%B4%BB%E7%A0%81/
 - https://github.com/1049906948/vue3-big-screen
+- https://tailwindcss.com/docs/installation
+- https://element-plus.org/zh-CN/component/icon.html#%E4%BD%BF%E7%94%A8%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8
 ### 项目截图
 ![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/big-screen_2m.gif)
 

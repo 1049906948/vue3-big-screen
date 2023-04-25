@@ -18,13 +18,15 @@
         <el-icon><Expand /></el-icon>
       </div>
       <ul v-if="!toggleMenu" class="z-10 fixed -top-0 -right-2 p-3 w-[70vw] h-screen shadow-2xl md:hidden list-none
-            flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in">
+            flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in bg-black-50 gradient-bg-welcome">
         <li class="text-xl w-full my-2">
-          <div  class="text-white md:hidden cursor-pointer" @click="setToggleMenu(false)">
-            <el-icon><CloseBold /></el-icon>
+          <div class="text-white md:hidden cursor-pointer" @click="setToggleMenu(false)">
+            <el-icon>
+              <CloseBold/>
+            </el-icon>
           </div>
         </li>
-        <li v-for="item in comments" class="mx-4 cursor-pointer my-10 text-lg text-black">{{ item.title }}</li>
+        <li v-for="item in comments" class="mx-4 cursor-pointer my-10 text-lg text-black text-white">{{ item.title }}</li>
       </ul>
     </div>
   </nav>
@@ -66,5 +68,10 @@ function setToggleMenu(bol) {
 </script>
 
 <style scoped>
-
+.gradient-bg-welcome {
+  background-color: #0f0e13;
+  background-image: radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+  radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+  radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+}
 </style>
