@@ -31,6 +31,18 @@
     <div class="box">
 
       <el-row :gutter="12">
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div @click="handleUrl('/examples')">表格</div>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
+
+
+    <div class="box">
+
+      <el-row :gutter="12">
 
         <el-col :span="6">
           <el-card class="item" shadow="always">
