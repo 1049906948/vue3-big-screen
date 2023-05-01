@@ -22,12 +22,12 @@ export default {
   },
   methods: {
     handleItem(item, index) {
-      // console.log(item, index, '12313213')
+      console.log(item, index, '12313213')
     },
     init() {
-      let str = "床前明月光，一是地下双，举头望明月，低头思故乡."
-      let arr = [...str]
-      this.list = arr
+      // let str = "床前明月光，一是地下双，举头望明月，低头思故乡."
+      // let arr = [...str]
+      // this.list = arr
     }
   }
 }
