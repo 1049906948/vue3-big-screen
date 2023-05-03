@@ -6,6 +6,9 @@
             <input class="w-full text-center" :disabled="!['床','思','光'].includes(item)" type="text" :value="item" />
       </div>
     </div>
+    <div>
+      qeqeqw
+    </div>
   </div>
 </template>
 
