@@ -6,6 +6,9 @@
             <input class="w-full text-center" :disabled="!['床','思','光'].includes(item)" type="text" :value="item" />
       </div>
     </div>
+    <div>
+      qeqeqw
+    </div>
   </div>
 </template>
 
@@ -25,9 +28,9 @@ export default {
       console.log(item, index, '12313213')
     },
     init() {
-      // let str = "床前明月光，一是地下双，举头望明月，低头思故乡."
-      // let arr = [...str]
-      // this.list = arr
+      let str = "床前明月光，一是地下双，举头望明月，低头思故乡."
+      let arr = [...str]
+      this.list = arr
     }
   }
 }
