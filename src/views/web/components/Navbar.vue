@@ -2,7 +2,7 @@
   <!-- nav 导航栏start-->
   <nav class="w-full flex md:justify-center justify-between items-center p-4">
     <div class="md:flex-[0.5] flex-initial justify-center items-center">
-      <img alt="logo" class="w-8 h-8 cursor-pointer block" src="favicon.ico"/>
+<!--      <img alt="logo" class="w-8 h-8 cursor-pointer block" src="favicon.ico"/>-->
     </div>
     <ul class="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
       <li v-for="item in comments" class="mx-4 cursor-pointer">{{ item.title }}</li>
