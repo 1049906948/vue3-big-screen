@@ -16,6 +16,7 @@
 - https://github.com/1049906948/vue3-big-screen
 - https://tailwindcss.com/docs/installation
 - https://element-plus.org/zh-CN/component/icon.html#%E4%BD%BF%E7%94%A8%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8
+- https://vercel.com/new
 ### 项目截图
 ![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/big-screen_2m.gif)
 
