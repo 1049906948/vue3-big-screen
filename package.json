@@ -13,6 +13,7 @@
     "echarts": "^5.4.0",
     "element-plus": "^2.3.3",
     "fake-progress": "^1.0.4",
+    "three": "^0.152.2",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
   },
