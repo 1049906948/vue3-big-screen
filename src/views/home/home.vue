@@ -12,12 +12,12 @@
         </el-col>
         <el-col :span="6">
           <el-card class="item" shadow="always">
-            <div @click="handleStart()">开始</div>
+            <div @click="handleUrl('/element')">element ui</div>
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card class="item" shadow="always">
-            <div @click="handleEnd()">结束</div>
+            <div @click="handleUrl('/Screen')">大屏展示</div>
           </el-card>
         </el-col>
         <el-col :span="6">
@@ -87,9 +87,7 @@
       </el-row>
     </div>
 
-    <div class="test">
-      <el-progress type="circle" :percentage="parseInt(fake.progress*100)" />
-    </div>
+
 
 
 
@@ -124,23 +122,8 @@
 // }
 
 import {useRouter} from 'vue-router';
-import Fakeprogress from 'fake-progress'
 import { onMounted, onBeforeMount, ref, watch } from 'vue';
 const router=useRouter()
-console.log(123123)
-const time = new Fakeprogress({
-  timeConstant : 10000,
-  autoStart : true
-});
-const fake = ref(time);
-
-function handleStart(){
-  fake.value.start()
-}
-
-function handleEnd(){
-  fake.value.end()
-}
 
 function handleUrl(url){
   router.push(url)
@@ -149,12 +132,7 @@ function handleUrl(url){
 </script>
 
 <style lang="scss" scoped>
-.test{
-  //background: #55a532;
-  width: 1200px;
-  margin: 0 auto;
-  margin-top: 80px;
-}
+
 .box {
   width: 1200px;
   margin: 0 auto;
