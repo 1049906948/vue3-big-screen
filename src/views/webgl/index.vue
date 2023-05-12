@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 bg-gray-50 min-h-screen">
-         123123123132132
+
   </div>
 </template>
 
