@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'has-logo': showSidebarLogo }">
-    <!--    <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />-->
+<!--        <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />-->
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
           :collapse="isCollapse"
@@ -12,13 +12,13 @@
           mode="vertical"
           text-color="#fff"
       >
-        <SidebarItem
-            v-for="route in permissionStore.routes"
-            :key="route.path"
-            :base-path="route.path"
-            :is-collapse="isCollapse"
-            :item="route"
-        />
+<!--        <SidebarItem-->
+<!--            v-for="route in permissionStore.routes"-->
+<!--            :key="route.path"-->
+<!--            :base-path="route.path"-->
+<!--            :is-collapse="isCollapse"-->
+<!--            :item="route"-->
+<!--        />-->
       </el-menu>
     </el-scrollbar>
   </div>

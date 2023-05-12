@@ -2,7 +2,7 @@
   <ckLoading>
     <div :class="classObj" class="app-wrapper  bg-gray-50 min-h-screen">
       <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleClickOutside" />
-<!--      <Sidebar class="sidebar-container" />-->
+      <Sidebar class="sidebar-container" />
       <div :class="{ hasTagsView: showTagsView }" class="main-container">
         <div :class="{ 'fixed-header': fixedHeader }">
 <!--          <NavigationBar />-->
@@ -22,7 +22,7 @@
 import { computed } from "vue"
 import { useAppStore, DeviceType } from "@/store/modules/app"
 import { useSettingsStore } from "@/store/modules/settings"
-// import { AppMain, NavigationBar, Settings, Sidebar, TagsView, RightPanel } from "./components"
+import { AppMain, NavigationBar, Settings, Sidebar, TagsView, RightPanel } from "./components"
 
 const appStore = useAppStore()
 const settingsStore = useSettingsStore()
