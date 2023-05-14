@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 bg-gray-50 min-h-screen">
-    <div class="w-1/2 m-auto mt-60">
+    <div class="w-1/2 m-auto mt-5">
 
       <div class="mb-5">
         <el-button @click="handleAdd">add</el-button>
@@ -27,28 +27,11 @@
 </template>
 
 <script lang="ts" setup>
-const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-]
+
+import {ref} from "vue";
+
+const tableData = ref([]);
+
 
 interface User {
   date: string
@@ -60,11 +43,19 @@ const handleEdit = (index: number, row: User) => {
   console.log(index, row)
 }
 const handleDelete = (index: number, row: User) => {
+  tableData.value.splice(index,1)
+  console.log(index, row)
   console.log(index, row)
 }
 
 const handleAdd = () => {
-  console.log(1111)
+  let obj = {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  }
+  tableData.value.push(obj)
+
 }
 
 const handleExport = () => {
