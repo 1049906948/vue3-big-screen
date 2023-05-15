@@ -55,7 +55,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/table',
     name: 'table',
     component: () => import('@/views/table/index.vue')
-  }
+  },
+  {
+    path: '/barrage',
+    name: 'barrage',
+    component: () => import('@/views/barrage/index.vue')
+  },
 ]
 
 const router = createRouter({

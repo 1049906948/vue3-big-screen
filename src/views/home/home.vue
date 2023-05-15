@@ -16,8 +16,8 @@
           </el-card>
         </el-col>
         <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/Screen')">大屏展示</div>
+          <el-card class="item" shadow="barrage">
+            <div @click="handleUrl('/barrage')">弹幕</div>
           </el-card>
         </el-col>
         <el-col :span="6">
