@@ -1,106 +1,152 @@
 <template>
-  <div class="home p-4 bg-gray-50 min-h-screen">
-    <h2 style=" text-align: center;">Vue-barrage 基于vue的弹幕组件</h2>
+  <div class="home p-4 bg-gray-50 min-h-screen flex-c">
     <div class="ck-content">
-      <!-- 确保父元素是相对定位，弹幕容器是绝对定位 -->
-      <v-barrage :arr="arr" :isPause="isPause" :percent="100"></v-barrage>
+      <div class="text">
+        <div>4123123</div>
+        <div>4123123</div>
+        <div>4123123</div>
+      </div>
+
+      <div class="text2">
+        <div>4123123</div>
+        <div>4123123</div>
+        <div>4123123</div>
+      </div>
+
+      <div class="text3">
+        <div>4123123</div>
+        <div>4123123</div>
+        <div>4123123</div>
+      </div>
+
+      <div class="text4">
+        <div class="active">4123123</div>
+        <div class="active">4123123</div>
+        <div class="active">4123123</div>
+      </div>
+
     </div>
-    <div class="barrage-control">
-      <input id="sendContent" v-model="sendContent" placeholder="回车发送" type="text" @keyup.enter="sendBarrage"/>
-      方向:
-      <select v-model="direction" style="margin:0px 12px;">
-        <option value="default">默认</option>
-        <option value="top">顶部</option>
-      </select>
-      <input v-model="isJs" type="checkbox"/> js弹幕(直接写代码)
-      <button id="sendBarrageBtn" style="margin-left:25px;" @click="sendBarrage">发送</button>
-      <button id="pauseBtn" @click="isPause=true">暂停</button>
-      <button id="startBtn" @click="isPause=false">开始</button>
-    </div>
+<!--    <div class="ck-content2">-->
+<!--      <div class="text">-->
+<!--        <div>4123123</div>-->
+<!--        <div>4123123</div>-->
+<!--        <div>4123123</div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
-<script>
-import VBarrage from './components/ck-barrage/index.vue'
+<script setup>
 
-export default {
-  name: 'home',
-  components: {
-    VBarrage
-  },
-  data() {
-    return {
-      arr: [],
-      isPause: false,
-      sendContent: null,
-      isJs: false,
-      direction: 'default'
-    }
-  },
-  mounted() {
-    this.initTestData();
-  },
-  methods: {
-    // 初始化模拟弹幕数据
-    initTestData() {
-      let arr = [
-        '这是一条有弹幕',
-        '今天去打LOL',
-        '可以吗？',
-        '一起嗨！！！'
-      ]
-      for (let i = 0; i < 6; i++) {
-        for (let index = 0; index < 1000; index++) {
-          if (index % 2 == 0) {
-            this.arr.push({
-              direction: 'top',
-              content: arr[parseInt(Math.random() * arr.length)]
-            })
-          } else {
-            this.arr.push({
-              direction: 'default',
-              content: arr[parseInt(Math.random() * arr.length)]
-            })
-          }
-        }
-      }
-    },
-    // 发送弹幕
-    sendBarrage() {
-      if (this.arr.length > 1 && this.sendContent != '' && this.sendContent != null) {
-        this.arr.unshift({
-          content: this.sendContent,
-          direction: this.direction,
-          isSelf: true,
-          style: {
-            color: 'red',
-            fontSize: '25px'
-          },
-          isJs: this.isJs
-        });
-      } else {
-        this.arr.push({
-          content: this.sendContent,
-          direction: this.direction,
-          isSelf: true,
-          style: {
-            color: 'red'
-          },
-          isJs: this.isJs
-        });
-      }
-      this.sendContent = null;
-    },
-  }
-}
 </script>
 <style lang="scss" scoped>
 .ck-content {
   height: 400px;
-  width: 800px;
+  width: 400px;
   position: relative;
-  margin: 0px auto;
-  background: #000;
+  border: 1px solid red;
+  overflow: hidden;
+}
+.ck-content2{
+  height: 400px;
+  width: 400px;
+  //position: relative;
+  //margin: 0px auto;
+  //background: #000;
+  border: 1px solid red;
+  visibility: hidden;
+}
+
+
+@keyframes rightToLeft {
+  0% {
+    transform: translateX(400px);
+  }
+
+  100% {
+    transform: translateX(-400px);
+  }
+
+}
+
+@keyframes rightToLeft2 {
+  0% {
+    transform: translateX(530px);
+  }
+
+  100% {
+    transform: translateX(-530px);
+  }
+
+}
+
+@keyframes rightToLeft3 {
+  0% {
+    transform: translateX(660px);
+  }
+
+  100% {
+    transform: translateX(-660px);
+  }
+
+}
+
+@keyframes rightToLeft4 {
+  0% {
+    transform: translateX(790px);
+  }
+
+  100% {
+    transform: translateX(-790px);
+  }
+
+}
+
+
+.text {
+  animation: rightToLeft 10s infinite normal linear;
+  //border: 1px solid red;
+  padding: 2px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  transform: translateX(400px);
+
+}
+
+.text2{
+  animation: rightToLeft2 10s infinite normal linear;
+  //border: 1px solid red;
+  padding: 2px;
+  box-sizing: border-box;
+  display: flex;
+  //justify-content: space-around;
+  justify-content: space-between;
+  transform: translateX(530px);
+}
+
+.text3{
+  animation: rightToLeft3 10s infinite normal linear;
+  //border: 1px solid red;
+  padding: 2px;
+  box-sizing: border-box;
+  display: flex;
+  //justify-content: space-evenly;
+  justify-content: space-between;
+  transform: translateX(660px);
+}
+
+.text4{
+  animation: rightToLeft4 10s infinite normal linear;
+  padding: 2px;
+  box-sizing: border-box;
+  display: flex;
+  //justify-content: flex-end;
+  justify-content: space-between;
+  transform: translateX(790px);
+  .active{
+    //margin: 0 20px;
+  }
 }
 
 .barrage-control {

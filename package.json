@@ -15,7 +15,8 @@
     "fake-progress": "^1.0.4",
     "three": "^0.152.2",
     "vue": "^3.2.41",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue3-danmaku": "^1.4.0-beta.1"
   },
   "devDependencies": {
     "@types/mockjs": "^1.0.3",

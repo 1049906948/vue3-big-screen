@@ -1,6 +1,5 @@
 <template>
   <section class="barrage-wrapper" ref="barrageWrapper" :style="{height:percent+'%'}">
-    123123
     <div class="barrage-main">
       <div class="barrage-main-dm" :class="{'ani-pause':isPause,'ani-running':!isPause}" ref="barrageMainDm"></div>
     </div>
