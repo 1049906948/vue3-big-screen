@@ -85,6 +85,21 @@
           </el-card>
         </el-col>
       </el-row>
+
+
+
+    </div>
+
+    <div class="box">
+
+      <el-row :gutter="12">
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div class="item" @click="handleUrl('/test')">test</div>
+          </el-card>
+        </el-col>
+      </el-row>
+
     </div>
 
 
