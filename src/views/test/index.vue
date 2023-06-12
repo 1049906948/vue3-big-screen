@@ -1,6 +1,6 @@
 <template>
   <div class="ck_container">
-    <button class="button" id="counter" @click="increment">{{ count }}</button>
+
   </div>
 </template>
 

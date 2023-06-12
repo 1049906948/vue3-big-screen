@@ -1,5 +1,12 @@
 import { ref, nextTick } from 'vue'
 
+
+/**
+ * <button class="button" id="counter" @click="increment">{{ count }}</button>
+ * import {testNextTick} from "./com.config"
+ * const {increment,count} = testNextTick()
+ * @returns {{count: Ref<UnwrapRef<number>>, increment: ((function(): Promise<void>)|*)}}
+ */
 export function testNextTick(){
     const count = ref(0)
     async function increment() {
