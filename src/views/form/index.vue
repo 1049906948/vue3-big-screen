@@ -1,8 +1,6 @@
 <template>
   <div class="bg-gray-50 min-h-screen pt-20">
-    <!--    <el-input v-model="activeNames"></el-input>-->
-    <!--    {{activeNames}}-->
-    <el-card class="box-card  m-auto">
+    <el-card class="box-card  m-auto w-1/2">
       <el-form :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="100px" class="demo-ruleForm">
         <el-form-item label="活动名称" prop="activeName">
           <el-input v-model="ruleForm.activeName"></el-input>
@@ -74,21 +72,7 @@ export default {
   components: {
     Plus
   },
-  // props:{
-  //   activeName:{
-  //     type:Number
-  //   }
-  // },
   setup(props) {
-
-    // const activeNames = ref(props.activeName)
-
-    // activeNames.value = activeNames.value * 2
-
-    // watch(question, async (newQuestion, oldQuestion) => {
-    //   console.log(question,'22')
-    // })
-
     const ruleFormRef = ref(null)
     var validatePhone = (rule, value, callback) => {
       if (!value) {
