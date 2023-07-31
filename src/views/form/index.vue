@@ -1,5 +1,6 @@
 <template>
   <div class="bg-gray-50 min-h-screen pt-20">
+    <el-config-provider :locale="zhCn">
     <el-card class="box-card  m-auto w-1/2">
       <el-form :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="100px" class="demo-ruleForm">
         <el-form-item label="活动名称" prop="activeName">
@@ -11,21 +12,16 @@
             <el-option label="测试商家" value="2"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="活动时段" required>
-          <el-col :span="11">
-            <el-form-item prop="activeStartTime">
-              <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.activeStartTime"
-                              style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="11">
-            <el-form-item prop="activeEndTime">
-              <el-time-picker placeholder="选择时间" v-model="ruleForm.activeEndTime"
-                              style="width: 100%;"></el-time-picker>
-            </el-form-item>
-          </el-col>
+
+        <el-form-item label="活动时段" prop="activeStartTime" >
+          <el-date-picker
+              v-model="ruleForm.activeStartTime"
+              type="datetimerange"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间"
+          />
         </el-form-item>
+
         <el-form-item label="用户手机号" prop="phone">
           <el-input v-model="ruleForm.phone"></el-input>
         </el-form-item>
@@ -36,9 +32,12 @@
             <el-radio :label="9">新人首单免运费</el-radio>
           </el-radio-group>
         </el-form-item>
+
         <el-form-item label="营业执照" prop="businessLicense">
-          <el-upload class="avatar-uploader" action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-                     :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+          <el-upload class="avatar-uploader"
+                     :show-file-list="false"
+                     :on-success="handleAvatarSuccess"
+                     :before-upload="beforeAvatarUpload">
             <img v-if="ruleForm.businessLicense" :src="ruleForm.businessLicense" class="avatar"/>
             <el-icon v-else class="avatar-uploader-icon">
               <Plus/>
@@ -61,18 +60,21 @@
         </el-form-item>
       </el-form>
     </el-card>
+    </el-config-provider>
   </div>
 </template>
 <script>
 import {Plus} from '@element-plus/icons-vue'
 import ElNotification from 'element-plus'
 import {reactive, ref, watch} from 'vue';
+import { ElConfigProvider } from "element-plus"
+import zhCn from "element-plus/lib/locale/lang/zh-cn"
 
 export default {
   components: {
     Plus
   },
-  setup(props) {
+  setup: function (props) {
     const ruleFormRef = ref(null)
     var validatePhone = (rule, value, callback) => {
       if (!value) {
@@ -89,7 +91,7 @@ export default {
       activeName: '',
       storeList: '',
       phone: '',
-      activeStartTime: '',
+      activeStartTime:[],
       activeEndTime: '',
       freightType: '',
       businessLicense: '',
@@ -109,11 +111,29 @@ export default {
         {validator: validatePhone, trigger: 'blur'}
       ],
       activeStartTime: [
-        {type: 'date', required: true, message: '请选择日期', trigger: 'blur'}
+        {
+          required: true,
+          type: 'array',
+          message: "请选择工时时间段",
+          fields: {
+            0: {
+              required: true,
+              message: '请选择开始时间',
+              trigger: 'change',
+              type: 'date'
+            },
+            1: {
+              required: true,
+              message: '请选择结束时间',
+              trigger: 'change',
+              type: 'date'
+            }
+          }
+        }
       ],
-      activeEndTime: [
-        {type: 'date', required: true, message: '请选择时间', trigger: 'blur'}
-      ],
+      // activeEndTime: [
+      //   {type: 'date', required: true, message: '请选择时间', trigger: 'blur'}
+      // ],
       freightType: [
         {required: true, message: '运费类型不能为空', trigger: 'blur'},
       ],
@@ -125,6 +145,8 @@ export default {
       ]
     })
     const submitForm = async () => {
+
+      console.log(ruleForm, 'ruleForm')
       console.log(ruleFormRef, 'formRef')
       await ruleFormRef.value.validate((valid) => {
         if (valid) {
@@ -139,25 +161,30 @@ export default {
     const resetForm = () => {
       ruleFormRef.value.resetFields();
     }
-    const handleAvatarSuccess = () => {
-
+    const handleAvatarSuccess = (e) => {
+      console.log(e,'handleAvatarSuccess')
     }
     const beforeAvatarUpload = (file) => {
-      console.log(file, 'file')
-      const type = file.type
-      const typeArr = ['image/png', 'image/jpg']
-      if (!typeArr.includes(type)) {
-        ElNotification({
-          title: 'Error',
-          message: '只支持png，jpg格式！',
-          type: 'error',
-        })
-        return false
+      const reader = new FileReader();
+      reader.readAsDataURL(file); // 读取成 data url
+      reader.onload = function (e) {
+        ruleForm.businessLicense = e.target.result
       }
+      // const type = file.type
+      // const typeArr = ['image/png', 'image/jpg']
+      // if (!typeArr.includes(type)) {
+      //   ElNotification({
+      //     title: 'Error',
+      //     message: '只支持png，jpg格式！',
+      //     type: 'error',
+      //   })
+      //   return false
+      // }
     }
 
     return {
-      // activeNames,
+      zhCn,
+      ElConfigProvider,
       ruleFormRef,
       ruleForm,
       rules,
@@ -170,6 +197,9 @@ export default {
 }
 </script>
 <style scoped>
+.demo-ruleForm {
+  width: 500px;
+}
 .avatar-uploader .avatar {
   width: 178px;
   height: 178px;
@@ -197,10 +227,5 @@ export default {
   width: 178px;
   height: 178px;
   text-align: center;
-}
-</style>
-<style scoped>
-.demo-ruleForm {
-  width: 500px;
 }
 </style>
