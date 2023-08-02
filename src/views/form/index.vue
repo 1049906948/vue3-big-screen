@@ -13,9 +13,9 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="活动时段" prop="activeStartTime" >
+        <el-form-item label="活动时段" prop="dateTime" >
           <el-date-picker
-              v-model="ruleForm.activeStartTime"
+              v-model="ruleForm.dateTime"
               type="datetimerange"
               start-placeholder="开始时间"
               end-placeholder="结束时间"
@@ -69,6 +69,7 @@ import ElNotification from 'element-plus'
 import {reactive, ref, watch} from 'vue';
 import { ElConfigProvider } from "element-plus"
 import zhCn from "element-plus/lib/locale/lang/zh-cn"
+import {formatDay} from "@/views/form/com.config";
 
 export default {
   components: {
@@ -91,7 +92,8 @@ export default {
       activeName: '',
       storeList: '',
       phone: '',
-      activeStartTime:[],
+      dateTime:[],
+      activeStartTime:"",
       activeEndTime: '',
       freightType: '',
       businessLicense: '',
@@ -110,7 +112,7 @@ export default {
         {required: true, message: '电话不能为空', trigger: 'blur'},
         {validator: validatePhone, trigger: 'blur'}
       ],
-      activeStartTime: [
+      dateTime: [
         {
           required: true,
           type: 'array',
@@ -145,6 +147,9 @@ export default {
       ]
     })
     const submitForm = async () => {
+
+      ruleForm.activeStartTime =  formatDay(ruleForm.dateTime[0])
+      ruleForm.activeEndTime =  formatDay(ruleForm.activeEndTime[1])
 
       console.log(ruleForm, 'ruleForm')
       console.log(ruleFormRef, 'formRef')

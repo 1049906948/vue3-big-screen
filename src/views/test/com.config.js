@@ -23,3 +23,6 @@ export function testNextTick(){
         count
     };
 }
+
+
+const {increment,count} = testNextTick()

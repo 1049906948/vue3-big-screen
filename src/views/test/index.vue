@@ -1,12 +1,17 @@
 <template>
   <div class="ck_container">
-
+     <div>
+       {{num}}
+     </div>
+     <my-form :header="num"></my-form>
   </div>
 </template>
 
 <script setup>
-import {testNextTick} from "./com.config"
-const {increment,count} = testNextTick()
+import { ref } from "vue";
+import MyForm from "@/views/test/components/myForm.vue";
+const num = ref(1)
+
 </script>
 
 <style scoped>
