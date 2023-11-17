@@ -5,5 +5,5 @@
 </template>
 
 <script lang="ts" setup>
-import ckHome from './home.vue';
+import ckHome from "./home.vue";
 </script>

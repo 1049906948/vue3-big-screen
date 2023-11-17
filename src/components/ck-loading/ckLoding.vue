@@ -13,24 +13,24 @@
 
 <script lang="ts">
 export default {
-  name: "ckLoading"
+  name: "ckLoading",
 };
 </script>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from "vue";
 import windowResize from "@/utils/resize";
-const { screenRef, calcRate, windowDraw, unWindowDraw } = windowResize()
+const { screenRef, calcRate, windowDraw, unWindowDraw } = windowResize();
 const loading = ref(true);
 onMounted(() => {
   setTimeout(() => {
     loading.value = false;
   }, 500);
-})
+});
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/common/variables.scss';
+@import "@/assets/scss/common/variables.scss";
 .mask {
   position: fixed;
   top: 0;
@@ -39,7 +39,7 @@ onMounted(() => {
   right: 0;
   background-color: $theme-color;
   z-index: 9999;
-  background-image: url('@/assets/home_bg.png');
+  background-image: url("@/assets/home_bg.png");
   .loading-title {
     font-size: $base-font-size;
     color: #fff;

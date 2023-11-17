@@ -1,12 +1,10 @@
 {
-    "msg": "",
-    "code": 0,
-    "data": {
-        "totalPage": "",
-        "dataList": [
-            
-        ],
-        "totalCount": "",
-        "pageNum": ""
-    }
+  "msg": "",
+  "code": 0,
+  "data": {
+    "totalPage": "",
+    "dataList": [],
+    "totalCount": "",
+    "pageNum": ""
+  }
 }

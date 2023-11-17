@@ -1,38 +1,38 @@
 <template>
   <div :class="{ 'has-logo': showSidebarLogo }">
-<!--        <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />-->
+    <!--        <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />-->
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-          :collapse="isCollapse"
-          :collapse-transition="false"
-          :default-active="activeMenu"
-          :unique-opened="true"
-          active-text-color="#fff"
-          background-color="#001529"
-          mode="vertical"
-          text-color="#fff"
+        :collapse="isCollapse"
+        :collapse-transition="false"
+        :default-active="activeMenu"
+        :unique-opened="true"
+        active-text-color="#fff"
+        background-color="#001529"
+        mode="vertical"
+        text-color="#fff"
       >
-<!--        <SidebarItem-->
-<!--            v-for="route in permissionStore.routes"-->
-<!--            :key="route.path"-->
-<!--            :base-path="route.path"-->
-<!--            :is-collapse="isCollapse"-->
-<!--            :item="route"-->
-<!--        />-->
+        <!--        <SidebarItem-->
+        <!--            v-for="route in permissionStore.routes"-->
+        <!--            :key="route.path"-->
+        <!--            :base-path="route.path"-->
+        <!--            :is-collapse="isCollapse"-->
+        <!--            :item="route"-->
+        <!--        />-->
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {computed} from "vue"
-import {useRoute} from "vue-router"
-import {storeToRefs} from "pinia"
-import {useAppStore, DeviceType} from "@/store/modules/app"
-import {useSettingsStore} from "@/store/modules/settings"
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { storeToRefs } from "pinia";
+import { useAppStore, DeviceType } from "@/store/modules/app";
+import { useSettingsStore } from "@/store/modules/settings";
 
-const appStore = useAppStore()
-const settingsStore = useSettingsStore()
+const appStore = useAppStore();
+const settingsStore = useSettingsStore();
 
 const activeMenu = computed(() => {
   // const { meta, path } = route
@@ -41,13 +41,11 @@ const activeMenu = computed(() => {
   // }
   // return path
   return 111;
-})
-
+});
 
 const isCollapse = computed(() => {
-  return !appStore.sidebar.opened
-})
-
+  return !appStore.sidebar.opened;
+});
 </script>
 
 <style lang="scss" scoped>

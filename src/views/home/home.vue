@@ -1,9 +1,6 @@
 <template>
   <div class="ck-container">
-
-
     <div class="box">
-
       <el-row :gutter="12">
         <el-col :span="6">
           <el-card class="item" shadow="always">
@@ -29,7 +26,6 @@
     </div>
 
     <div class="box">
-
       <el-row :gutter="12">
         <el-col :span="6">
           <el-card class="item" shadow="always">
@@ -54,11 +50,8 @@
       </el-row>
     </div>
 
-
     <div class="box">
-
       <el-row :gutter="12">
-
         <el-col :span="6">
           <el-card class="item" shadow="always">
             <div class="item" @click="handleUrl('/tailwind')">tailwind</div>
@@ -79,19 +72,18 @@
 
         <el-col :span="6">
           <el-card class="item" shadow="always">
-            <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
+            <a
+              href="https://github.com/1049906948/vue3-big-screen"
+              target="_blank"
+            >
               github
             </a>
           </el-card>
         </el-col>
       </el-row>
-
-
-
     </div>
 
     <div class="box">
-
       <el-row :gutter="12">
         <el-col :span="6">
           <el-card class="item" shadow="always">
@@ -104,13 +96,7 @@
           </el-card>
         </el-col>
       </el-row>
-
     </div>
-
-
-
-
-
   </div>
 </template>
 
@@ -141,18 +127,17 @@
 //   }
 // }
 
-import {useRouter} from 'vue-router';
-import { onMounted, onBeforeMount, ref, watch } from 'vue';
-const router=useRouter()
+import { useRouter } from "vue-router";
+import { onMounted, onBeforeMount, ref, watch } from "vue";
+const router = useRouter();
 
-function handleUrl(url){
-  router.push(url)
-  console.log(12)
+function handleUrl(url) {
+  router.push(url);
+  console.log(12);
 }
 </script>
 
 <style lang="scss" scoped>
-
 .box {
   width: 1200px;
   margin: 0 auto;

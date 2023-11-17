@@ -6,11 +6,9 @@
 
 <script setup>
 import { ref } from "vue";
-const props = defineProps(['header'])
-const num = ref(props.header*2)
-console.log(num)
+const props = defineProps(["header"]);
+const num = ref(props.header * 2);
+console.log(num);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

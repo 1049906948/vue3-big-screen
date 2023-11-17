@@ -1,7 +1,5 @@
-
-
-export interface ILocalStore{
-    startTime:number,
-    expires:number,
-    [propName: string]: any
+export interface ILocalStore {
+  startTime: number;
+  expires: number;
+  [propName: string]: any;
 }
