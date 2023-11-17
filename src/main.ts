@@ -19,3 +19,5 @@ app.use(store).use(router).use(CustomEcharts).use(ElementPlus).use(DataVVue3).mo
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
+
+

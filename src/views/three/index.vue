@@ -7,7 +7,13 @@
 <script setup>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import {TrackballControls} from "three/addons/controls/TrackballControls";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { onMounted, ref } from "vue";
+import {FlyControls} from "three/addons/controls/FlyControls";
+import {PointerLockControls} from "three/addons/controls/PointerLockControls";
+
 
 let screenDom = ref(null);
 
@@ -27,6 +33,7 @@ onMounted(() => {
 
   // 3.创建WebGLRenderer渲染器
   const renderer = new THREE.WebGLRenderer();
+
   // 通过setSize()方法设置渲染的长宽
   renderer.setSize(screenDom.value.clientWidth, screenDom.value.clientHeight);
   // 设置渲染位置
@@ -65,8 +72,15 @@ onMounted(() => {
   // 把三维坐标系 添加到场景中
   scene.add(axes);
 
-  // 9.添加控制器
+  // 9.添加控制器  轨道控制器
   let control = new OrbitControls(camera, renderer.domElement);
+
+  //轨迹球控制器
+  // const controls = new TrackballControls(camera, renderer.domElement);
+  //飞行控制器
+  // const controls = new FlyControls(camera, renderer.domElement);
+  //指针锁定控制器
+  // const controls = new PointerLockControls(camera, renderer.domElement);
 
 
   // 10.动态渲染
@@ -76,6 +90,31 @@ onMounted(() => {
     //渲染
     renderer.render(scene, camera);
   }
+
+  // // 创建 GLTFLoader
+  // const loader = new GLTFLoader();
+  //
+  // // 加载 GLTF 格式的模型文件
+  // loader.load('path/to/your/model.gltf', (gltf) => {
+  //   const model = gltf.scene;
+  //   scene.add(model);
+  //   renderer.render(scene, camera);
+  // });
+  //
+  //
+  // // 创建 OBJLoader
+  // const loaders = new OBJLoader();
+  //
+  // // 加载 OBJ 格式的模型文件
+  // loaders.load('path/to/your/model.obj', (object) => {
+  //   scene.add(object);
+  //   renderer.render(scene, camera);
+  // });
+
+
+
+
+
   render();
 });
 </script>

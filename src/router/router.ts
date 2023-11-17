@@ -61,6 +61,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'barrage',
     component: () => import('@/views/barrage/index.vue')
   },
+    {
+        path: '/test',
+        name: 'test',
+        component: () => import('@/views/test/index.vue')
+    },
+  {
+    path: '/form',
+    name: 'form',
+    component: () => import('@/views/form/index.vue')
+  },
 ]
 
 const router = createRouter({

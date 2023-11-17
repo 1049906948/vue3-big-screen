@@ -1,0 +1,13 @@
+<!--          <el-col :span="11">-->
+<!--            <el-form-item prop="activeStartTime">-->
+<!--              <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.activeStartTime"-->
+<!--                              style="width: 100%;"></el-date-picker>-->
+<!--            </el-form-item>-->
+<!--          </el-col>-->
+<!--          <el-col class="line" :span="2">-</el-col>-->
+<!--          <el-col :span="11">-->
+<!--            <el-form-item prop="activeEndTime">-->
+<!--              <el-time-picker placeholder="选择时间" v-model="ruleForm.activeEndTime"-->
+<!--                              style="width: 100%;"></el-time-picker>-->
+<!--            </el-form-item>-->
+<!--          </el-col>-->
