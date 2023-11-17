@@ -5,4 +5,3 @@
 基于Vue3的可视化大屏项目
 
 #### Software Architecture
-
