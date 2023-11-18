@@ -42,7 +42,7 @@ export default defineConfig({
         pure_funcs: ["console.log"],
       },
       output: {
-        // 去掉注释内容
+        // 去掉注释内容  已弃用：已弃用
         comments: true,
       },
     },
