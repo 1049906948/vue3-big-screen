@@ -33,6 +33,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 500,
     minify: "terser",
     cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
+    reportCompressedSize: true, //vite2 --brotliSize
     terserOptions: {
       compress: {
         // warnings: false,
@@ -63,7 +64,6 @@ export default defineConfig({
         },
       },
     },
-    brotliSize: false,
   },
   plugins: [
     vue(),
