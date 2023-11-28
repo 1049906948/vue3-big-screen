@@ -72,10 +72,7 @@
 
         <el-col :span="6">
           <el-card class="item" shadow="always">
-            <a
-              href="https://github.com/1049906948/vue3-big-screen"
-              target="_blank"
-            >
+            <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
               github
             </a>
           </el-card>
@@ -100,40 +97,14 @@
   </div>
 </template>
 
-<script setup>
-// import Fakeprogress from 'fake-progress'
-// export default {
-//   data(){
-//     return{
-//       fake:new Fakeprogress({
-//         timeConstant: 60000,
-//         autoStart : true
-//       })
-//     }
-//   },
-//   created() {
-//
-//   },
-//   methods:{
-//     handleUrl(){
-//
-//     },
-//     handleStart(){
-//       this.fake.start()
-//     },
-//     handleEnd(){
-//       this.fake.end()
-//     }
-//   }
-// }
+<script lang="ts" setup>
 
-import { useRouter } from "vue-router";
+import { RouteLocationRaw, useRouter } from "vue-router";
 import { onMounted, onBeforeMount, ref, watch } from "vue";
 const router = useRouter();
 
-function handleUrl(url) {
+function handleUrl(url: RouteLocationRaw) {
   router.push(url);
-  console.log(12);
 }
 </script>
 
