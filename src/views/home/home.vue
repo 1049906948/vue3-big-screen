@@ -1,124 +1,41 @@
 <template>
   <div class="ck-container">
+
+
     <div class="box">
       <el-row :gutter="12">
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/Screen')">大屏展示</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/element')">element ui</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="barrage">
-            <div @click="handleUrl('/barrage')">弹幕</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div class="item" @click="handleUrl('/admin')">管理系统</div>
+        <el-col class="box" v-for="sub in data" :key="sub" :span="6">
+          <el-card  class="item" shadow="always">
+            <div @click="handleUrl(sub.url)">{{sub.name}}</div>
           </el-card>
         </el-col>
       </el-row>
     </div>
 
-    <div class="box">
-      <el-row :gutter="12">
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/examples')">表格</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/three')">three</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/webgl')">webgl</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div @click="handleUrl('/table')">表格</div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
-
-    <div class="box">
-      <el-row :gutter="12">
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div class="item" @click="handleUrl('/tailwind')">tailwind</div>
-          </el-card>
-        </el-col>
-
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div class="item" @click="handleUrl('/web3')">web3</div>
-          </el-card>
-        </el-col>
-
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div class="item" @click="handleUrl('/grid')">九宫格</div>
-          </el-card>
-        </el-col>
-
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <a href="https://github.com/1049906948/vue3-big-screen" target="_blank">
-              github
-            </a>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
-
-    <div class="box">
-      <el-row :gutter="12">
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div class="item" @click="handleUrl('/test')">test</div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="item" shadow="always">
-            <div class="item" @click="handleUrl('/form')">表单</div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-
+import {data} from "@/views/home/com.config";
 import { RouteLocationRaw, useRouter } from "vue-router";
-import { onMounted, onBeforeMount, ref, watch } from "vue";
 const router = useRouter();
 
-function handleUrl(url: RouteLocationRaw) {
+function handleUrl(url:any) {
+
   router.push(url);
 }
 </script>
 
 <style lang="scss" scoped>
 .box {
-  width: 1200px;
-  margin: 0 auto;
-  margin-top: 20px;
-
+  width: 80%;
+  margin: 0 auto 20px;
+  //border: 1px solid red;
   .item {
     text-align: center;
     cursor: pointer;
-    height: 100px;
-    line-height: 50px;
+    height: 80px;
+    line-height: 40px;
     &:hover {
       background: #3de7c9;
     }
