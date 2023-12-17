@@ -1,7 +1,5 @@
 <template>
   <div class="ck-container">
-
-
     <div class="box">
       <el-row :gutter="12">
         <el-col class="box" v-for="sub in data" :key="sub" :span="6">
@@ -11,7 +9,6 @@
         </el-col>
       </el-row>
     </div>
-
   </div>
 </template>
 
