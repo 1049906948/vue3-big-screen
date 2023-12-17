@@ -1,5 +1,6 @@
 import mEcharts from "./echarts-custom/EchartsCustom.vue";
 import ckLoading from "./ck-loading/ckLoding.vue";
+// import domeComponent from "./demo-component/index";
 // 组件列表
 const components = [mEcharts, ckLoading];
 

@@ -7,3 +7,27 @@
   height: 100vh;
   padding-top: 30px;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgb(218, 218, 219);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+
+.mb16 {
+  margin-bottom: 16px;
+}

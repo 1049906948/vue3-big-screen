@@ -76,6 +76,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "form",
     component: () => import("@/views/form/index.vue"),
   },
+  {
+    path: "/dragdropGrid",
+    name: "dragdropGrid",
+    component: () => import("@/views/dragdropGrid/index.vue"),
+  },
 ];
 
 const router = createRouter({
