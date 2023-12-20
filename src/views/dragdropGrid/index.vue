@@ -4,7 +4,7 @@ import LeftSidebar from './LeftSidebar.vue';
 import DropContent from './components/dragdrop/DropContent.vue';
 import PreviewLayout from './components/dragdrop/PreviewLayout.vue';
 import demoList from './schema';
-
+import { ElMessageBox } from 'element-plus'
 const data = ref([
   {
     id: 1111,
@@ -27,14 +27,33 @@ const data = ref([
 ]);
 
 const dropContentRef = ref<InstanceType<typeof DropContent>>();
+
+const dialogVisible = ref(false)
+
+const handleClose = (done: () => void) => {
+  // dialogVisible.value = false
+  ElMessageBox.confirm(
+    '您确定要关闭此对话框吗？',
+    {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+    }
+  )
+    .then(() => {
+      done()
+    })
+    .catch(() => {
+      console.log("异常报错")
+    })
+}
 </script>
 <template>
   <div class="drag-container">
     <div class="drag-container__left">
-      <LeftSidebar :list="demoList" group-name="drag-demo" />
+      <LeftSidebar :list="demoList" group-name="drag-demo"/>
     </div>
     <div class="drag-container__right">
-      <div class="mb16" style="width: 100%; height: 100%">
+      <div class="mb16" style="width: 100%; height: 92%">
         <DropContent
           v-model="data"
           ref="dropContentRef"
@@ -71,17 +90,23 @@ const dropContentRef = ref<InstanceType<typeof DropContent>>();
       <div class="mb16">
         <el-button @click="() => dropContentRef.addRow()">添加行</el-button>
         <el-button @click="() => dropContentRef.deleteRow()">删除行</el-button>
+        <el-button  @click="dialogVisible = true">预览</el-button>
       </div>
-      <h3 class="mb16">预览</h3>
-      <div style="width: 100%; height: 100%">
-        <PreviewLayout
-          :data="data"
-          :row="6"
-          :column="6"
-          :gap="6"
-          :skipEmpty="false"
-        />
-      </div>
+      <el-dialog
+        v-model="dialogVisible"
+        fullscreen
+        :before-close="handleClose"
+      >
+        <div class="dialog-body">
+          <PreviewLayout
+            :data="data"
+            :row="6"
+            :column="6"
+            :gap="6"
+            :skipEmpty="false"
+          />
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -107,5 +132,9 @@ const dropContentRef = ref<InstanceType<typeof DropContent>>();
     height: 100%;
     overflow-y: auto;
   }
+}
+.dialog-body{
+  //border: 1px solid red;
+  height: 90vh;
 }
 </style>

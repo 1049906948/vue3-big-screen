@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useBoxSize, useBoxGrid } from './drag';
+import { ref, computed } from "vue";
+import { useBoxSize, useBoxGrid } from "./drag";
+import ckComponent from "./ckComponent"
+
 
 const props = withDefaults(
   defineProps<{
@@ -19,8 +21,8 @@ const props = withDefaults(
     column: 0,
     row: 0,
     gap: 0,
-    borderRadius: '6px',
-  }
+    borderRadius: "6px",
+  },
 );
 
 const previewLayoutRef = ref<HTMLElement>();
@@ -28,20 +30,20 @@ const previewLayoutRef = ref<HTMLElement>();
 const { columnCount, rowCount } = useBoxGrid(
   computed(() => props.data),
   props.column,
-  props.row
+  props.row,
 );
 
 const boxSize = useBoxSize(
   previewLayoutRef,
   props.column,
   props.row,
-  props.gap
+  props.gap,
 );
 
 const getPreviewStyle = ({ x, y, row, column }: DragItemData) => {
   return {
     // grid 下标从 1 开始, 需要 + 1
-    'grid-area': `${y + 1} / ${x + 1} / ${y + row + 1}/ ${x + column + 1}`,
+    "grid-area": `${y + 1} / ${x + 1} / ${y + row + 1}/ ${x + column + 1}`,
   };
 };
 </script>
@@ -55,12 +57,11 @@ const getPreviewStyle = ({ x, y, row, column }: DragItemData) => {
         :key="`${item.key}${i}`"
         :style="getPreviewStyle(item)"
       >
-<!--        <component-->
-<!--          style="width: 100%; height: 100%"-->
-<!--          :is="item.key"-->
-<!--          :data="item"-->
-<!--        />-->
-
+        <ckComponent
+          style="width: 100%; height: 100%"
+          :is="item.key"
+          :data="item"
+        />
       </div>
     </div>
   </div>
@@ -77,18 +78,29 @@ const getPreviewStyle = ({ x, y, row, column }: DragItemData) => {
     row-gap: v-bind("gap+'px'");
     column-gap: v-bind("gap+'px'");
     grid-template-columns: repeat(
-      v-bind('columnCount'),
-        v-bind("boxSize.width+'px'")
+      v-bind("columnCount"),
+      v-bind("boxSize.width+'px'")
     );
     grid-template-rows: repeat(
-      v-bind('rowCount'),
-        v-bind("boxSize.height+'px'")
+      v-bind("rowCount"),
+      v-bind("boxSize.height+'px'")
     );
   }
 
   &__item {
-    border-radius: v-bind('borderRadius');
+    border-radius: v-bind("borderRadius");
     overflow: hidden;
   }
 }
+// .demo-component {
+//   width: "100%";
+//   height: "100%";
+//   color: "#fff";
+//   background-color: #707eb1;
+//   display: "flex";
+//   justify-content: center;
+//   align-items: center;
+//   font-size: 26px;
+//   font-weight: 600;
+// }
 </style>
