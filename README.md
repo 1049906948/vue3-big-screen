@@ -40,7 +40,7 @@
 ### 使用说明
 ```
 # 克隆项目
-git clone https://gitee.com/xiaoxiang_reincarnation/vue3-big-screen.git
+git clone https://gitee.com/lucky_ck/vue3-big-screen.git
 
 # 进入项目
 cd vue3-big-screen
