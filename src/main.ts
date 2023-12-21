@@ -25,31 +25,3 @@ app
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
-// app.component(
-//   "demo-component",
-//   defineComponent(
-//     (props: { data: DragItemData }) => {
-//       return () =>
-//         h(
-//           "div",
-//           {
-//             style: {
-//               width: "100%",
-//               height: "100%",
-//               color: "#fff",
-//               backgroundColor: "#707eb1",
-//               display: "flex",
-//               justifyContent: "center",
-//               alignItems: "center",
-//               fontSize: "26px",
-//               fontWeight: "600",
-//             },
-//           },
-//           `${props.data.column}x${props.data.row}`,
-//         );
-//     },
-//     {
-//       props: ["data"],
-//     },
-//   ),
-// );
