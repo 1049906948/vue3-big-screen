@@ -59,4 +59,8 @@ export const data = [
     url: "/dragdropGrid",
     name: "Grid 拖拽布局",
   },
+  {
+    url: "/collection",
+    name: "催收",
+  },
 ];

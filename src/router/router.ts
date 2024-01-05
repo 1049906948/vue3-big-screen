@@ -81,6 +81,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "dragdropGrid",
     component: () => import("@/views/dragdropGrid/index.vue"),
   },
+  {
+    path: "/collection",
+    name: "collection",
+    component: () => import("@/views/collection/index.vue"),
+  },
 ];
 
 const router = createRouter({
