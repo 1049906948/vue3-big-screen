@@ -2,33 +2,19 @@
   <div class="bg-gray-50">
     <el-config-provider :locale="zhCn">
       <el-card class="box-card m-auto">
-        <el-form
-          :model="ruleForm"
-          :rules="rules"
-          ref="ruleFormRef"
-          label-width="100px"
-          class="demo-ruleForm"
-        >
+        <el-form :model="ruleForm"  :rules="rules" ref="ruleFormRef" label-width="100px" class="demo-ruleForm">
           <el-form-item label="活动名称" prop="activeName">
             <el-input v-model="ruleForm.activeName"></el-input>
           </el-form-item>
           <el-form-item label="门店范围" prop="storeList">
-            <el-select
-              v-model="ruleForm.storeList"
-              placeholder="请选择门店范围"
-            >
+            <el-select v-model="ruleForm.storeList" placeholder="请选择门店范围" >
               <el-option label="测试门店" value="1"></el-option>
               <el-option label="测试商家" value="2"></el-option>
             </el-select>
           </el-form-item>
 
           <el-form-item label="活动时段" prop="dateTime">
-            <el-date-picker
-              v-model="ruleForm.dateTime"
-              type="datetimerange"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间"
-            />
+            <el-date-picker v-model="ruleForm.dateTime" type="datetimerange" start-placeholder="开始时间"  end-placeholder="结束时间"/>
           </el-form-item>
 
           <el-form-item label="用户手机号" prop="phone">
@@ -43,17 +29,8 @@
           </el-form-item>
 
           <el-form-item label="营业执照" prop="businessLicense">
-            <el-upload
-              class="avatar-uploader"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
-            >
-              <img
-                v-if="ruleForm.businessLicense"
-                :src="ruleForm.businessLicense"
-                class="avatar"
-              />
+            <el-upload  class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+              <img v-if="ruleForm.businessLicense" :src="ruleForm.businessLicense" class="avatar"  />
               <el-icon v-else class="avatar-uploader-icon">
                 <Plus />
               </el-icon>
@@ -70,9 +47,7 @@
             <el-switch v-model="ruleForm.account"></el-switch>
           </el-form-item>
           <el-form-item>
-            <el-button type="danger" @click="submitForm(ruleFormRef)"
-            >确定</el-button
-            >
+            <el-button type="danger" @click="submitForm(ruleFormRef)">确定</el-button>
             <el-button @click="resetForm(ruleFormRef)">重置</el-button>
           </el-form-item>
         </el-form>
