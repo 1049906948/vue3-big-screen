@@ -4,6 +4,7 @@ import { resolve } from "path";
 import compress from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
 // import viteImagemin from 'vite-plugin-imagemin';
+import AutoImport from 'unplugin-auto-import/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -67,6 +68,10 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    AutoImport({
+      imports: ['vue', 'vue-router', 'pinia'], // 自动导入的依赖库数组
+      dts: './auto-imports.d.ts', // 自动导入类型定义文件路径
+    }),
     compress(),
     // viteImagemin({
     // 	gifsicle: {
