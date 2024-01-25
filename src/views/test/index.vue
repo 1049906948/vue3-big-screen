@@ -4,13 +4,23 @@
       {{ num }}
     </div>
     <my-form :header="num"></my-form>
+    <div @click="handleOk">点击</div>
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { ref,reactive } from "vue";
 import MyForm from "@/views/test/components/myForm.vue";
 const num = ref(1);
+
+const state = reactive({
+
+})
+
+const handleOk = ()=>{
+
+}
+
 </script>
 
 <style scoped>
