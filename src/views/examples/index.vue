@@ -1,30 +1,30 @@
 <template>
   <div class="bg-gray-50 min-h-screen pt-20">
     <div class="w-40 m-auto">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th v-for="c in cols">{{ c }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="i in cells[0].length">
-            <th>{{ i - 1 }}</th>
-            <td v-for="(c, j) in cols">
-              <cell :r="i - 1" :c="j"></cell>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<!--      <table>-->
+<!--        <thead>-->
+<!--          <tr>-->
+<!--            <th></th>-->
+<!--            <th v-for="c in cols">{{ c }}</th>-->
+<!--          </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--          <tr v-for="i in cells[0].length">-->
+<!--            <th>{{ i - 1 }}</th>-->
+<!--            <td v-for="(c, j) in cols">-->
+<!--              <cell :r="i - 1" :c="j"></cell>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
     </div>
   </div>
 </template>
 
 <script setup>
-import cell from "./components/Cell.vue";
-import { cells } from "./com.config";
-const cols = cells.map((_, i) => String.fromCharCode(65 + i));
+// import cell from "./components/Cell.vue";
+// import { cells } from "./com.config";
+// const cols = cells.map((_, i) => String.fromCharCode(65 + i));
 </script>
 
 <style scoped>

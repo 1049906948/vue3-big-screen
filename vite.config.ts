@@ -8,6 +8,14 @@ import AutoImport from 'unplugin-auto-import/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define:{
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
+    __VUE_I18N_LEGACY_API__: JSON.stringify(false),
+    __VUE_I18N_FULL_INSTALL__: JSON.stringify(false),
+    __INTLIFY_PROD_DEVTOOLS__: JSON.stringify(false),
+    __VERSION__: JSON.stringify(process.env.npm_package_version),
+    __NEXT_NAME__: JSON.stringify(process.env.npm_package_name),
+  },
   resolve: {
     extensions: [".js", ".vue", ".json", "scss", ".ts"],
     alias: [

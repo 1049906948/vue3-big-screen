@@ -9,7 +9,7 @@ const components = [mEcharts, ckLoading,RightToolbar];
 const install = (Vue: any) => {
   // 遍历注册全局组件
   components.map((component) => Vue.component(component.name, component));
-  console.log(Vue);
+  // console.log(Vue);
 };
 
 export default {
