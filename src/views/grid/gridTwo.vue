@@ -19,7 +19,7 @@
 </template>
 
 <script  lang="ts" setup name="gridTwo">
-import {ref,onMounted} from "vue"
+// import {ref,onMounted} from "vue"
 import {custList, mapList} from "@/views/grid/com.config";
 import {fetchList} from "@/views/grid/api";
 const loading = ref(false);
