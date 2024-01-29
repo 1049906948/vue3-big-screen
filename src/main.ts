@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router/router";
 import store from "@/store";
 import DataVVue3 from "@kjgl77/datav-vue3";
+import { i18n } from './i18n';
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import "@/assets/scss/tailwind/index.css";
 import "@/assets/scss/index.scss";
@@ -21,6 +22,7 @@ app
   .use(CustomEcharts)
   .use(ElementPlus)
   .use(DataVVue3)
+  .use(i18n)
   .mount("#app");
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
