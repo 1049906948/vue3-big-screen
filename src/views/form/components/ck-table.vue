@@ -6,18 +6,23 @@
           <span class="font-bold">人员管理</span>
         </div>
       </template>
-      <el-form :model="state.queryForm" ref="queryRef" :inline="true" label-width="100px" v-show="showSearch">
+
+
+      <el-form :model="state.queryForm" ref="queryRef" label-width="100px"   v-show="showSearch">
         <el-row>
+
           <el-col :span="6">
             <el-form-item label="京东" prop="code">
-              <el-input placeholder="请输入名称" v-model="state.queryForm.code" />
+              <el-input placeholder="请输入名称" v-model="state.queryForm.name" />
             </el-form-item>
           </el-col>
+
           <el-col :span="6">
             <el-form-item label="个人信息" prop="code">
-              <el-input placeholder="请输入名称" v-model="state.queryForm.code" />
+              <el-input placeholder="请输入名称" v-model="state.queryForm.user" />
             </el-form-item>
           </el-col>
+
           <el-col :span="6">
             <el-form-item label="角色名称" prop="code">
               <el-select v-model="state.queryForm.code" placeholder="请选择门店范围" >
@@ -26,6 +31,7 @@
               </el-select>
             </el-form-item>
           </el-col>
+
           <el-col :span="6">
             <el-form-item>
               <el-button  icon="search" type="primary" @click="getDataList">
@@ -34,6 +40,7 @@
               <el-button icon="Refresh"  @click="resetQuery">重置</el-button>
             </el-form-item>
           </el-col>
+
         </el-row>
       </el-form>
 
