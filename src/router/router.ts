@@ -86,6 +86,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "collection",
     component: () => import("@/views/collection/index.vue"),
   },
+  {
+    path: "/interview",
+    name: "interview",
+    component: () => import("@/views/interview/index.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -63,4 +63,8 @@ export const data = [
     url: "/collection",
     name: "催收",
   },
+  {
+    url: "/interview",
+    name: "interview",
+  },
 ];
