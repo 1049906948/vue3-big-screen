@@ -1,29 +1,15 @@
 # Vue3-Big-Screen
-![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/logo.jpg)
+
 
 ### 项目介绍
 
-- 这里一个基于 Vue3、Vite、TypeScript、DataV、ECharts 框架的 " **数据大屏项目** "。
-- 使用 template实现组件封装，各类型图标支持动态渲染，可根据自身需求进行替换。
-- 使用Vite进行项目构建提高了开发和打包效率。
-- 项目按照 1920*1080 作为设计稿，支持任何尺寸的同比例缩放。
-- 项目参考[原项目](https://gitee.com/MTrun/vue-big-screen-plugin)的界面和设计思路，优化了相关细节，解决了原先项目中的各种错误。
-- 项目已经适配移动端H5，有兴趣的朋友可以点击这里[传送门](https://gitee.com/xiaoxiang_reincarnation/vue3-big-screen-mobile.git)。
-- 项目中注释了图片压缩vite插件，如需对图片进行压缩可自行安装vite-plugin-imagemin插件 
-  ```npm i vite-plugin-imagemin -D 或者 cnpm i vite-plugin-imagemin -D```
-- https://github.com/hsiangleev/element-plus-admin
-- https://learnjava.baimuxym.cn/pages/%E5%88%A9%E7%94%A8github%E9%A1%B9%E7%9B%AE%E5%85%8D%E8%B4%B9%E7%94%B3%E8%AF%B7IDEA%E6%BF%80%E6%B4%BB%E7%A0%81/
-- https://github.com/1049906948/vue3-big-screen
-- https://tailwindcss.com/docs/installation
-- https://element-plus.org/zh-CN/component/icon.html#%E4%BD%BF%E7%94%A8%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8
-- https://vercel.com/new
-- https://gitee.com/un-pany/v3-admin-vite
-- https://element-plus.gitee.io/zh-CN/guide/installation.html#%E7%8E%AF%E5%A2%83%E6%94%AF%E6%8C%81
+
 ### 项目截图
-![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/big-screen_2m.gif)
+
+
 
 ### 项目预览
-- 在线预览地址：https://screen.xkxk.tech
+
 
 
 ### 相关技术栈
@@ -38,6 +24,7 @@
 4.  [echarts API 文档](https://echarts.apache.org/zh/api.html#echarts)
 
 ### 使用说明
+
 ```
 # 克隆项目
 git clone https://gitee.com/lucky_ck/vue3-big-screen.git
@@ -55,9 +42,27 @@ npm run dev
 npm run build
 ```
 
+### git 配置
 
-
-
-
-
-
+- git config core.ignorecase false
+- git config core.precomposeunicode true
+- git config core.quotepath false
+- git config core.safecrlf false
+- git config --global core.autocrlf false
+- git config --global core.eol lf
+- git config --global core.filemode false
+- git config --global core.pager cat
+- git config --global core.pager "less -R"
+- git config --global core.safecrlf false
+- git config --global core.whitespace trailing-space,space-before-tab
+- git config --global color.ui auto
+- git config --global color.diff auto
+- git config --global color.status auto
+- git config --global color.branch auto
+- git config --global color.interactive auto
+- git config --global color.pager auto
+- git config --global color.ui auto
+- git config --global color.diff auto
+- git config --global color.status auto
+- git config --global color.branch auto
+- git config --global color.interactive auto

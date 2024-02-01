@@ -1,19 +1,18 @@
 <template>
   <div class="p-10 bg-gray-50 min-h-screen">
-      <div id="my-three" ref="screenDom"></div>
+    <div id="my-three" ref="screenDom"></div>
   </div>
 </template>
 
 <script setup>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import {TrackballControls} from "three/addons/controls/TrackballControls";
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { TrackballControls } from "three/addons/controls/TrackballControls";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { onMounted, ref } from "vue";
-import {FlyControls} from "three/addons/controls/FlyControls";
-import {PointerLockControls} from "three/addons/controls/PointerLockControls";
-
+import { FlyControls } from "three/addons/controls/FlyControls";
+import { PointerLockControls } from "three/addons/controls/PointerLockControls";
 
 let screenDom = ref(null);
 
@@ -23,10 +22,10 @@ onMounted(() => {
 
   // 2.创建透视投影相机
   const camera = new THREE.PerspectiveCamera(
-      50,
-      screenDom.value.clientWidth / screenDom.value.clientHeight,
-      0.1,
-      1000
+    50,
+    screenDom.value.clientWidth / screenDom.value.clientHeight,
+    0.1,
+    1000,
   );
   // 设置相机位置
   camera.position.set(5, 10, 10);
@@ -82,7 +81,6 @@ onMounted(() => {
   //指针锁定控制器
   // const controls = new PointerLockControls(camera, renderer.domElement);
 
-
   // 10.动态渲染
   function render() {
     //循环调用
@@ -111,10 +109,6 @@ onMounted(() => {
   //   renderer.render(scene, camera);
   // });
 
-
-
-
-
   render();
 });
 </script>
@@ -125,4 +119,3 @@ onMounted(() => {
   height: 90vh;
 }
 </style>
-

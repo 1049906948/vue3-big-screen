@@ -1,31 +1,41 @@
 <template>
   <ckLoading>
-    <div :class="classObj" class="app-wrapper  bg-gray-50 min-h-screen">
-      <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleClickOutside" />
+    <div :class="classObj" class="app-wrapper bg-gray-50 min-h-screen">
+      <div
+        v-if="classObj.mobile && classObj.openSidebar"
+        class="drawer-bg"
+        @click="handleClickOutside"
+      />
       <Sidebar class="sidebar-container" />
       <div :class="{ hasTagsView: showTagsView }" class="main-container">
         <div :class="{ 'fixed-header': fixedHeader }">
-<!--          <NavigationBar />-->
-<!--          <TagsView v-show="showTagsView" />-->
+          <!--          <NavigationBar />-->
+          <!--          <TagsView v-show="showTagsView" />-->
         </div>
-<!--        <AppMain />-->
-<!--        <RightPanel v-if="showSettings">-->
-<!--          <Settings />-->
-<!--        </RightPanel>-->
+        <!--        <AppMain />-->
+        <!--        <RightPanel v-if="showSettings">-->
+        <!--          <Settings />-->
+        <!--        </RightPanel>-->
       </div>
     </div>
   </ckLoading>
 </template>
 
-
 <script lang="ts" setup>
-import { computed } from "vue"
-import { useAppStore, DeviceType } from "@/store/modules/app"
-import { useSettingsStore } from "@/store/modules/settings"
-import { AppMain, NavigationBar, Settings, Sidebar, TagsView, RightPanel } from "./components"
+import { computed } from "vue";
+import { useAppStore, DeviceType } from "@/store/modules/app";
+import { useSettingsStore } from "@/store/modules/settings";
+import {
+  AppMain,
+  NavigationBar,
+  Settings,
+  Sidebar,
+  TagsView,
+  RightPanel,
+} from "./components";
 
-const appStore = useAppStore()
-const settingsStore = useSettingsStore()
+const appStore = useAppStore();
+const settingsStore = useSettingsStore();
 
 const classObj = computed(() => {
   return {
@@ -34,30 +44,28 @@ const classObj = computed(() => {
     withoutAnimation: appStore.sidebar.withoutAnimation,
     mobile: appStore.device === DeviceType.Mobile,
     showGreyMode: showGreyMode.value,
-    showColorWeakness: showColorWeakness.value
-  }
-})
-
+    showColorWeakness: showColorWeakness.value,
+  };
+});
 
 const showSettings = computed(() => {
-  return settingsStore.showSettings
-})
+  return settingsStore.showSettings;
+});
 const showTagsView = computed(() => {
-  return settingsStore.showTagsView
-})
+  return settingsStore.showTagsView;
+});
 const fixedHeader = computed(() => {
-  return settingsStore.fixedHeader
-})
+  return settingsStore.fixedHeader;
+});
 const showGreyMode = computed(() => {
-  return settingsStore.showGreyMode
-})
+  return settingsStore.showGreyMode;
+});
 const showColorWeakness = computed(() => {
-  return settingsStore.showColorWeakness
-})
+  return settingsStore.showColorWeakness;
+});
 const handleClickOutside = () => {
-  appStore.closeSidebar(false)
-}
-
+  appStore.closeSidebar(false);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -161,4 +169,3 @@ const handleClickOutside = () => {
   }
 }
 </style>
-

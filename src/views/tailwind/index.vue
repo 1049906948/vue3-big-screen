@@ -9,25 +9,24 @@
       <div v-for="comment in comments" :key="comment.id">
         <!-- 留言 -->
         <CommentItem
-            :user="comment.user"
-            :avatar="comment.avatar"
-            :time="comment.time"
-            :content="comment.content"
+          :user="comment.user"
+          :avatar="comment.avatar"
+          :time="comment.time"
+          :content="comment.content"
         />
         <!-- 留言列表 -->
         <ReplyContainer v-if="comment.replies">
           <CommentItem
-              v-for="reply in comment.replies"
-              :key="reply.id"
-              :user="reply.user"
-              :avatar="reply.avatar"
-              :time="reply.time"
-              :content="reply.content"
+            v-for="reply in comment.replies"
+            :key="reply.id"
+            :user="reply.user"
+            :avatar="reply.avatar"
+            :time="reply.time"
+            :content="reply.content"
           />
         </ReplyContainer>
         <ReplyBox @submit="addNewComment($event, comment.id)" />
       </div>
-
     </div>
   </main>
 </template>
@@ -48,37 +47,35 @@ function getAllComments() {
 
   comments.value = [
     {
-      user:"123",
-      avatar:"https://avatars.githubusercontent.com/u/2687921?v=4",
-      time:"2022",
-      content:"内容",
-      replies:null
+      user: "123",
+      avatar: "https://avatars.githubusercontent.com/u/2687921?v=4",
+      time: "2022",
+      content: "内容",
+      replies: null,
     },
     {
-      user:"123",
-      avatar:"https://avatars.githubusercontent.com/u/2687921?v=4",
-      time:"2022",
-      content:"内容",
-      replies:[
+      user: "123",
+      avatar: "https://avatars.githubusercontent.com/u/2687921?v=4",
+      time: "2022",
+      content: "内容",
+      replies: [
         {
-          user:"123",
-          avatar:"https://avatars.githubusercontent.com/u/2687921?v=4",
-          time:"2022",
-          content:"内容",
-        }
-      ]
-    }
-  ]
-
+          user: "123",
+          avatar: "https://avatars.githubusercontent.com/u/2687921?v=4",
+          time: "2022",
+          content: "内容",
+        },
+      ],
+    },
+  ];
 }
 
 onMounted(() => {
   getAllComments();
 });
 
-
 const addNewComment = async (content, replyTo) => {
-  console.log(content, replyTo)
+  console.log(content, replyTo);
 
   // const res = await fetch(`/api/comments`, {
   //   method: "POST",
@@ -103,11 +100,7 @@ const addNewComment = async (content, replyTo) => {
   // setTimeout(async () => {
   //   await getAllComments();
   // }, 1000);
-
 };
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

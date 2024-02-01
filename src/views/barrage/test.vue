@@ -1,26 +1,23 @@
 <template>
-  <div>
-
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "test"
-}
+  name: "test",
+};
 </script>
 
 <style lang="scss" scoped>
-.ck-content2{
+.ck-content2 {
   height: 400px;
   width: 400px;
-//position: relative;
-//margin: 0px auto;
-//background: #000;
+  //position: relative;
+  //margin: 0px auto;
+  //background: #000;
   border: 1px solid red;
   visibility: hidden;
 }
-
 
 @keyframes rightToLeft {
   0% {
@@ -30,7 +27,6 @@ export default {
   100% {
     transform: translateX(-400px);
   }
-
 }
 
 @keyframes rightToLeft2 {
@@ -41,7 +37,6 @@ export default {
   100% {
     transform: translateX(-530px);
   }
-
 }
 
 @keyframes rightToLeft3 {
@@ -52,7 +47,6 @@ export default {
   100% {
     transform: translateX(-660px);
   }
-
 }
 
 @keyframes rightToLeft4 {
@@ -63,54 +57,51 @@ export default {
   100% {
     transform: translateX(-790px);
   }
-
 }
-
 
 .text {
   animation: rightToLeft 10s infinite normal linear;
-//border: 1px solid red;
+  //border: 1px solid red;
   padding: 2px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   transform: translateX(400px);
-
 }
 
-.text2{
+.text2 {
   animation: rightToLeft2 10s infinite normal linear;
-//border: 1px solid red;
+  //border: 1px solid red;
   padding: 2px;
   box-sizing: border-box;
   display: flex;
-//justify-content: space-around;
+  //justify-content: space-around;
   justify-content: space-between;
   transform: translateX(530px);
 }
 
-.text3{
+.text3 {
   animation: rightToLeft3 10s infinite normal linear;
-//border: 1px solid red;
+  //border: 1px solid red;
   padding: 2px;
   box-sizing: border-box;
   display: flex;
-//justify-content: space-evenly;
+  //justify-content: space-evenly;
   justify-content: space-between;
   transform: translateX(660px);
 }
 
-.text4{
+.text4 {
   animation: rightToLeft4 10s infinite normal linear;
   padding: 2px;
   box-sizing: border-box;
   display: flex;
-//justify-content: flex-end;
+  //justify-content: flex-end;
   justify-content: space-between;
   transform: translateX(790px);
-.active{
-//margin: 0 20px;
-}
+  .active {
+    //margin: 0 20px;
+  }
 }
 
 .barrage-control {

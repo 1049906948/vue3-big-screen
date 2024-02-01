@@ -1,36 +1,20 @@
 <template>
   <div class="ck-container">
-    <div class="grid border grid-cols-6  w-80 m-auto">
-      <div v-for="(item,index) in  list" :class="{'bg-[#2952e3]':['床','思','光'].includes(item)}"
-           class="border text-center cursor-pointer" @click="handleItem(item,index)">
-            <input class="w-full text-center" :disabled="!['床','思','光'].includes(item)" type="text" :value="item" />
-      </div>
+    <grid-one></grid-one>
+    <grid-two></grid-two>
+    <grid-three v-model="name"></grid-three>
+    <div class="w-1/3 m-auto mt-10">
+      <el-input v-model="name"></el-input>
+      主页面：{{ name }}
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "index",
-  data() {
-    return {
-      list: []
-    }
-  },
-  created() {
-    this.init()
-  },
-  methods: {
-    handleItem(item, index) {
-      // console.log(item, index, '12313213')
-    },
-    init() {
-      let str = "床前明月光，一是地下双，举头望明月，低头思故乡."
-      let arr = [...str]
-      this.list = arr
-    }
-  }
-}
+<script lang="ts" setup name="grid">
+import GridOne from "@/views/grid/gridOne.vue";
+import GridTwo from "@/views/grid/gridTwo.vue";
+import GridThree from "@/views/grid/gridThree.vue";
+const name = ref("")
 </script>
 
 <style scoped>
