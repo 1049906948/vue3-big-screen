@@ -103,6 +103,11 @@
             <div class="item" @click="handleUrl('/form')">表单</div>
           </el-card>
         </el-col>
+        <el-col :span="6">
+          <el-card class="item" shadow="always">
+            <div class="item" @click="handleUrl('/game')">表单</div>
+          </el-card>
+        </el-col>
       </el-row>
 
     </div>
