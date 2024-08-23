@@ -105,7 +105,7 @@
         </el-col>
         <el-col :span="6">
           <el-card class="item" shadow="always">
-            <div class="item" @click="handleUrl('/game')">表单</div>
+            <div class="item" @click="handleUrl('/game')">测试</div>
           </el-card>
         </el-col>
       </el-row>
