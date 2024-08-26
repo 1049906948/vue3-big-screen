@@ -67,4 +67,12 @@ export const data = [
     url: "/interview",
     name: "interview",
   },
+  {
+    url: "/animation",
+    name: "动画",
+  },
+  {
+    url: "/404",
+    name: "404",
+  },
 ];
