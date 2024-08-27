@@ -101,6 +101,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "404",
     component: () => import("@/views/404/index.vue"),
   },
+  {
+    path: "/record",
+    name: "record",
+    component: () => import("@/views/record/index.vue"),
+  },
 ];
 
 const router = createRouter({

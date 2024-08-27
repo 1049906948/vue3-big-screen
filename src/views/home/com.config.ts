@@ -75,4 +75,8 @@ export const data = [
     url: "/404",
     name: "404",
   },
+  {
+    url: "/record",
+    name: "record",
+  },
 ];
