@@ -1,14 +1,30 @@
 <template>
     <ckLoading>
         <div class="p-4 bg-gray-50 min-h-screen">
-            <div ref="replayer" class="replayer m-auto mt-20" v-if="isPlaying"></div>
+            <!-- https://www.tailwindcss.cn/docs/position -->
+            <!-- https://element-plus.org/zh-CN/component/dialog.html -->
+
+            <el-dialog v-model="isPlaying" title="视频录制" width="54%" class="relative h-5/6">
+                <div v-if="isPlaying" id="replayer" ref="replayer" class="w-1/2 m-auto mt-20 absolute top-0 left-0">
+                </div>
+            </el-dialog>
+
+            <!-- <el-dialog v-model="isPlaying" title="视频录制" width="54%" class="relative h-5/6">
+                <div v-if="isPlaying" id="replayer" ref="replayer" class="w-1/2 m-auto mt-20 absolute top-0 left-0">
+                    <div class="replayer-wrapper" id="wrapper">
+                        <iframe id="replayIframe" style="width:53.85vw;"></iframe>
+                    </div>
+                </div>
+            </el-dialog> -->
+
+
             <div class="w-1/2 border-1 m-auto mt-60 text-center">
                 <el-button type="primary" @click="handleClick">api</el-button>
                 <el-button type="primary" @click="handleStart">屏幕分享</el-button>
                 <el-button type="primary" @click="handleRecord">开始录制</el-button>
                 <el-button type="primary" @click="handleStop">结束录制</el-button>
                 <el-button type="primary" @click="handleReplayer">回放</el-button>
-                <el-button type="primary" @click="handleDownload">下载视频</el-button>
+                <!-- <el-button type="primary" @click="handleDownload">下载视频</el-button> -->
             </div>
             <div class="w-1/2 border-1 m-auto mt-20 text-center">
                 <el-input type="textarea" v-model="numValue"></el-input>
@@ -18,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import * as rrweb from 'rrweb';
 import rrwebPlayer from 'rrweb-player';
 import 'rrweb-player/dist/style.css';
@@ -27,6 +43,16 @@ const replayer = ref(null);
 let events = ref([]);
 let numValue = ref("");
 const isPlaying = ref(false);
+const replayInstance = ref(null);
+
+
+watch(isPlaying, (newValue, OldValue) => {
+    console.log(isPlaying.value, '111');
+    if (!isPlaying.value) {
+        replayInstance.value = null;
+    }
+});
+
 function handleClick() {
     console.log(rrweb);
 }
@@ -75,24 +101,24 @@ function handleStop() {
     recorder.value();
 }
 function handleReplayer() {
-    if (!events.value.length) {
-        console.error('记录器未初始化。请先开始录制。');
-        return;
-    }
-    // replayer.value = new rrweb.Replayer(events.value, {
-    //     // target:replayer,
-    //     speed: 2, // 倍速回放
-    //     skipInactive: true, // 跳过不活跃时段
-    // });
-    // console.log('replayer:',replayer.value);
-    // replayer.value.play()
-    // replayer.value()
-
-    // replayer.replay();
-
+    if (!recorder.value) return console.error('记录器未初始化。请先开始录制。');
+    recorder.value();
+    if (!events.value.length) return console.error('记录器未有数据。');
     isPlaying.value = true;
+
+    // setTimeout(() => {
+    //     replayInstance.value = new rrweb.Replayer(events.value, {
+    //         root: replayer.value,
+    //         // speed: 2, // 倍速回放
+    //         // skipInactive: true, // 跳过不活跃时段
+    //     });
+    //     replayInstance.value.wrapper = document.getElementById('wrapper');
+    //     replayInstance.value.iframe = document.getElementById('replayIframe');
+    //     replayInstance.value.play()
+    // }, 100);
+
     setTimeout(() => {
-        const replayInstance = new rrwebPlayer({
+        replayInstance.value = new rrwebPlayer({
             target: replayer.value, // 可以自定义 DOM 元素
             // 配置项
             props: {
@@ -105,7 +131,7 @@ function handleReplayer() {
                 speedOption: [1, 2, 4, 8] //倍速播放可选值
             },
         });
-        replayInstance.addEventListener("finish", (payload) => {
+        replayInstance.value.addEventListener("finish", (payload) => {
             console.log(payload, 2222);
         })
         // replayInstance.play()
@@ -120,10 +146,10 @@ function handleDownload() {
 </script>
 
 <style scoped>
-.replayer {
-    width:50%;
-    height: 500px;
+.replayer-wrapper {
+    width: 50px;
     margin: 0 auto;
-    /* border: 1px solid #ccc; */
+    left: 0;
+    top: 0;
 }
 </style>
