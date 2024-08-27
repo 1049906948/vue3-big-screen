@@ -16,6 +16,7 @@
     "element-plus": "^2.3.3",
     "fake-progress": "^1.0.4",
     "rrweb": "^2.0.0-alpha.4",
+    "rrweb-player": "^1.0.0-alpha.4",
     "three": "^0.152.2",
     "vue": "^3.3.13",
     "vue-i18n": "9.2.2",

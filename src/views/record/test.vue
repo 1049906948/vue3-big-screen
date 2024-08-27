@@ -1,8 +1,7 @@
 <template>
     <ckLoading>
         <div class="p-4 bg-gray-50 min-h-screen">
-            <div ref="replayer" class="replayer m-auto mt-20" v-if="isPlaying"></div>
-            <div class="w-1/2 border-1 m-auto mt-60 text-center">
+            <div class="w-2/3 border-1 m-auto mt-20">
                 <el-button type="primary" @click="handleClick">api</el-button>
                 <el-button type="primary" @click="handleStart">屏幕分享</el-button>
                 <el-button type="primary" @click="handleRecord">开始录制</el-button>
@@ -10,9 +9,7 @@
                 <el-button type="primary" @click="handleReplayer">回放</el-button>
                 <el-button type="primary" @click="handleDownload">下载视频</el-button>
             </div>
-            <div class="w-1/2 border-1 m-auto mt-20 text-center">
-                <el-input type="textarea" v-model="numValue"></el-input>
-            </div>
+            <div ref="replayer"></div>
         </div>
     </ckLoading>
 </template>
@@ -20,13 +17,9 @@
 <script setup>
 import { ref } from 'vue';
 import * as rrweb from 'rrweb';
-import rrwebPlayer from 'rrweb-player';
-import 'rrweb-player/dist/style.css';
 let recorder = ref(null);
 const replayer = ref(null);
 let events = ref([]);
-let numValue = ref("");
-const isPlaying = ref(false);
 function handleClick() {
     console.log(rrweb);
 }
@@ -87,30 +80,8 @@ function handleReplayer() {
     // console.log('replayer:',replayer.value);
     // replayer.value.play()
     // replayer.value()
-
+   
     // replayer.replay();
-
-    isPlaying.value = true;
-    setTimeout(() => {
-        const replayInstance = new rrwebPlayer({
-            target: replayer.value, // 可以自定义 DOM 元素
-            // 配置项
-            props: {
-                events: events.value,
-                skipInactive: false,	//是否快速跳过无用户操作的阶段
-                showDebug: false, //是否在回放过程中打印 debug 信息
-                showWarning: false, //是否在回放过程中打印警告信息
-                autoPlay: true, //是否自动播放
-                showControlle: true,	 //是否显示播放器控制 UI
-                speedOption: [1, 2, 4, 8] //倍速播放可选值
-            },
-        });
-        replayInstance.addEventListener("finish", (payload) => {
-            console.log(payload, 2222);
-        })
-        // replayInstance.play()
-    }, 100);
-
 }
 
 function handleDownload() {
@@ -118,12 +89,3 @@ function handleDownload() {
 }
 
 </script>
-
-<style scoped>
-.replayer {
-    width:50%;
-    height: 500px;
-    margin: 0 auto;
-    /* border: 1px solid #ccc; */
-}
-</style>
