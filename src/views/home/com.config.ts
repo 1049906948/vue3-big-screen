@@ -79,4 +79,8 @@ export const data = [
     url: "/record",
     name: "record",
   },
+  {
+    url: "/ddFlow",
+    name: "ddFlow",
+  },
 ];

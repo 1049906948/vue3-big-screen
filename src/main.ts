@@ -10,7 +10,7 @@ import "@/assets/scss/index.scss";
 import "@/assets/icon/iconfont.css";
 // 引入 全局注册组件
 import CustomEcharts from "@/components/index";
-
+import JsonEditorVue from 'json-editor-vue3'
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -21,6 +21,7 @@ app
   .use(router)
   .use(CustomEcharts)
   .use(ElementPlus)
+  .use(JsonEditorVue)
   .use(DataVVue3)
   .use(i18n)
   .mount("#app");

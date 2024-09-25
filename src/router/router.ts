@@ -110,6 +110,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/record",
     name: "record",
     component: () => import("@/views/record/index.vue"),
+  },
+  {
+    path: "/ddFlow",
+    name: "ddFlow",
+    component: () => import("@/views/ddFlow/index.vue"),
   }
 ];
 

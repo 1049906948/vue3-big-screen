@@ -18,7 +18,7 @@ import { RouteLocationRaw, useRouter } from "vue-router";
 const router = useRouter();
 
 function handleUrl(url:any) {
-
+  console.log(url,'444')
   router.push(url);
 }
 </script>
