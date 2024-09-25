@@ -96,6 +96,21 @@ const routes: Array<RouteRecordRaw> = [
     name: "map",
     component: () => import("@/views/map/index.vue"),
   },
+  {
+    path: "/animation",
+    name: "animation",
+    component: () => import("@/views/animation/index.vue"),
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: () => import("@/views/404/index.vue"),
+  },
+  {
+    path: "/record",
+    name: "record",
+    component: () => import("@/views/record/index.vue"),
+  }
 ];
 
 const router = createRouter({
