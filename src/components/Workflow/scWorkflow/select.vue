@@ -88,7 +88,7 @@
 </template>
 
 <script>
-	import config from '@/config/workflow.js'
+	import config from '../config/workflow.js'
 
 	export default {
 		props: {

@@ -8,14 +8,14 @@
           保存图片
         </el-button>
         <div class="slider">
-          <el-button  type="primary"  icon="el-icon-minus" style="margin-right: 16px; width: 32px" @click="zoom -= 0.1" />
-          <el-slider v-model="zoom" :marks="marks" :min="0.1" :max="5" :step="0.1" height="200px" />
-          <el-button  type="primary" icon="el-icon-plus" style="margin-left: 16px; width: 32px" @click="zoom += 0.1" />
+          <el-button  type="primary"  icon="minus" style="margin-right: 16px; width: 32px" @click="zoom -= 0.1" />
+          <el-slider v-model="zoom"  :marks="marks" :min="0.1" :max="5" :step="0.1" height="200px" />
+          <el-button  type="primary"  icon="plus" style="margin-left: 16px; width: 32px" @click="zoom += 0.1" />
         </div>
       </div>
     </el-affix>
     <div  class="affix-container" :style="`transform: scale(${zoom})`" style="transform-origin: 0 0">
-<!--      <sc-workflow class="workflow" ref="workflowRef" id="content-to-capture" v-model="data.nodeConfig" />-->
+      <sc-workflow class="workflow" ref="workflowRef" id="content-to-capture" v-model="data.nodeConfig" />
       <el-drawer  v-model="drawer" size="500px" class="drawer" :append-to-body="true" :modal="false" :with-header="false">
         <div style="height: 100vh">
           <div style="padding: 1px; background-color: #3883fa">
@@ -34,18 +34,18 @@
       </el-drawer>
     </div>
   </template>
-  <script  setup name="Workflow">
+  <script lang="js"  setup name="Workflow">
   // import { ref, reactive, onMounted } from 'vue'
   import html2canvas from 'html2canvas'
   import useClipboard from 'vue-clipboard3'
   import JsonEditorVue from 'json-editor-vue3'
+  import scWorkflow from './scWorkflow/index.vue'
 
 
 
 
 
 
-  // import scWorkflow from './scWorkflow/index.vue'
   import { mockData } from './com.config'
   const zoom = ref(1)
   const marks = reactive({
@@ -100,11 +100,11 @@
   }
 
   onMounted(() => {
-    document.getElementById('app').onwheel = (e) => handleWeel(e)
+    // document.getElementById('app').onwheel = (e) => handleWeel(e)
   })
   </script>
 
-  <style>
+  <style scoped>
   :root {
     --el-drawer-padding-primary: 0;
   }

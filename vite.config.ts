@@ -5,7 +5,7 @@ import compress from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
 // import viteImagemin from 'vite-plugin-imagemin';
 import AutoImport from 'unplugin-auto-import/vite';
-// import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 // https://vitejs.dev/config/
 export default defineConfig({
   define:{
@@ -109,5 +109,6 @@ export default defineConfig({
     // 	},
     // }),
     visualizer(),
+    viteCommonjs()
   ],
 });

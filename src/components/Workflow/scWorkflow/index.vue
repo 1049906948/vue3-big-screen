@@ -10,26 +10,21 @@
 <template>
   <div class="sc-workflow-design">
     <div class="box-scale">
-      <node-wrap
-        v-if="nodeConfig"
-        v-model="nodeConfig"></node-wrap>
+      <node-wrap v-if="nodeConfig"  v-model="nodeConfig"></node-wrap>
       <div class="end-node">
         <div class="end-node-circle"></div>
         <div class="end-node-text">流程结束</div>
       </div>
     </div>
-    <use-select
-      v-if="selectVisible"
-      ref="useselect"
-      @closed="selectVisible = false"></use-select>
+    <use-select  v-if="selectVisible"  ref="useselect"  @closed="selectVisible = false"></use-select>
   </div>
 </template>
 
 <script>
 import nodeWrap from './nodeWrap.vue'
 import useSelect from './select.vue'
-
 export default {
+  name:"scWorkflow",
   provide() {
     return {
       select: this.selectHandle
