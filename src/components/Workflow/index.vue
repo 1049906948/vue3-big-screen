@@ -34,11 +34,11 @@
       </el-drawer>
     </div>
   </template>
-  <script setup name="Workflow">
+  <script  setup name="Workflow">
   // import { ref, reactive, onMounted } from 'vue'
   import html2canvas from 'html2canvas'
   import useClipboard from 'vue-clipboard3'
-
+  import JsonEditorVue from 'json-editor-vue3'
 
 
 
