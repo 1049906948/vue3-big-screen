@@ -91,6 +91,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "interview",
     component: () => import("@/views/interview/index.vue"),
   },
+  {
+    path: "/map",
+    name: "map",
+    component: () => import("@/views/map/index.vue"),
+  },
 ];
 
 const router = createRouter({
