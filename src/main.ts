@@ -15,7 +15,10 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
 const app = createApp(App);
-
+// 统一注册el图标
+for (const icon of Object.keys(ElementPlusIconsVue)) {
+  app.component(`ElIcon${icon}`, ElementPlusIconsVue[icon as keyof typeof ElementPlusIconsVue]);
+}
 app
   .use(store)
   .use(router)
