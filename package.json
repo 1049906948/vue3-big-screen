@@ -48,9 +48,5 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mock": "^2.6.3",
     "vue-tsc": "^1.0.9"
-  },
-  "browserslist": [
-    "defaults and fully supports es6-module",
-    "maintained node versions"
-  ]
+  }
 }

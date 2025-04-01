@@ -115,6 +115,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/ddFlow",
     name: "ddFlow",
     component: () => import("@/views/ddFlow/index.vue"),
+  },
+  {
+    path: "/seating",
+    name: "seating",
+    component: () => import("@/views/seating/index.vue"),
   }
 ];
 
