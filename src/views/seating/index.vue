@@ -1,297 +1,394 @@
 <template>
-  <div class="seating-container">
-    <h1 class="title">班级座位表</h1>
-    
-    <div class="seating-grid">
-      <div v-for="row in 6" :key="`row-${row}`" class="seat-row">
-        <!-- 左侧座位组 -->
-        <div class="seat-group left-group">
-          <div v-for="col in 2" :key="`left-${row}-${col}`" 
-               class="seat"
-               :class="{ 'occupied': getSeatInfo(row, col).name }"
-               draggable="true"
-               @dragstart="handleDragStart($event, row, col)"
-               @dragover.prevent
-               @drop="handleDrop($event, row, col)">
-            <div class="seat-content">
-              <div class="seat-position">{{ `${row}-${col}` }}</div>
-              <div class="student-name">{{ getSeatInfo(row, col).name || '空座' }}</div>
-            </div>
+  <div class="seating-bg">
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <h1>班级座位表</h1>
+      <div class="student" style="margin-left: 20px;">共 {{ studentCount }} 名学生</div>
+    </div>
+    <div class="classroom">
+      <div v-for="row in 8" :key="row" class="row">
+        <div class="group">
+          <div v-for="col in 2" :key="`seat-${row}-${col}`" class="seat"
+            :class="{ dragging: isDragging(row, col), 'drag-over': isDragOver(row, col) }" draggable="true"
+            @dragstart="handleDragStart(row, col)" @dragend="handleDragEnd" @dragover.prevent="handleDragOver(row, col)"
+            @drop="handleDrop(row, col)" @touchstart="handleTouchStart($event, row, col)"
+            @touchmove="handleTouchMove($event)" @touchend="handleTouchEnd($event)">
+            <p class="position">第{{ row }}排{{ col }}座</p>
+            <p class="name">{{ getSeatName(row, col) }}</p>
           </div>
         </div>
-        
-        <!-- 中间座位组 -->
-        <div class="seat-group middle-group">
-          <div v-for="col in 4" :key="`middle-${row}-${col + 2}`"
-               class="seat"
-               :class="{ 'occupied': getSeatInfo(row, col + 2).name }"
-               draggable="true"
-               @dragstart="handleDragStart($event, row, col + 2)"
-               @dragover.prevent
-               @drop="handleDrop($event, row, col + 2)">
-            <div class="seat-content">
-              <div class="seat-position">{{ `${row}-${col + 2}` }}</div>
-              <div class="student-name">{{ getSeatInfo(row, col + 2).name || '空座' }}</div>
-            </div>
+        <div class="group">
+          <div v-for="col in 4" :key="`seat-${row}-${col + 2}`" class="seat"
+            :class="{ dragging: isDragging(row, col + 2), 'drag-over': isDragOver(row, col + 2) }" draggable="true"
+            @dragstart="handleDragStart(row, col + 2)" @dragend="handleDragEnd"
+            @dragover.prevent="handleDragOver(row, col + 2)" @drop="handleDrop(row, col + 2)"
+            @touchstart="handleTouchStart($event, row, col + 2)" @touchmove="handleTouchMove($event)"
+            @touchend="handleTouchEnd($event)">
+            <p class="position">第{{ row }}排{{ col + 2 }}座</p>
+            <p class="name">{{ getSeatName(row, col + 2) }}</p>
           </div>
         </div>
-        
-        <!-- 右侧座位组 -->
-        <div class="seat-group right-group">
-          <div v-for="col in 2" :key="`right-${row}-${col + 6}`"
-               class="seat"
-               :class="{ 'occupied': getSeatInfo(row, col + 6).name }"
-               draggable="true"
-               @dragstart="handleDragStart($event, row, col + 6)"
-               @dragover.prevent
-               @drop="handleDrop($event, row, col + 6)">
-            <div class="seat-content">
-              <div class="seat-position">{{ `${row}-${col + 6}` }}</div>
-              <div class="student-name">{{ getSeatInfo(row, col + 6).name || '空座' }}</div>
-            </div>
+        <div class="group">
+          <div v-for="col in 2" :key="`seat-${row}-${col + 6}`" class="seat"
+            :class="{ dragging: isDragging(row, col + 6), 'drag-over': isDragOver(row, col + 6) }" draggable="true"
+            @dragstart="handleDragStart(row, col + 6)" @dragend="handleDragEnd"
+            @dragover.prevent="handleDragOver(row, col + 6)" @drop="handleDrop(row, col + 6)"
+            @touchstart="handleTouchStart($event, row, col + 6)" @touchmove="handleTouchMove($event)"
+            @touchend="handleTouchEnd($event)">
+            <p class="position">第{{ row }}排{{ col + 6 }}座</p>
+            <p class="name">{{ getSeatName(row, col + 6) }}</p>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="control-panel">
-      <button class="control-btn" @click="clearSeats">清空座位</button>
-      <button class="control-btn" @click="randomAssign">随机分配</button>
-      <button class="control-btn" @click="saveScreenshot">截图保存</button>
-      <button class="control-btn" @click="saveToLocal">保存座位</button>
+    <div class="buttons">
+      <button @click="clearSeats">清空座位</button>
+      <button @click="randomAssign">随机分配</button>
+      <button @click="sequentialAssign">顺序分配</button>
+      <button @click="saveAsImage">保存截图</button>
+      <button @click="saveToLocalStorage">保存布局</button>
+      <input type="file" ref="fileInput" accept=".csv,.xlsx,.xls" style="display: none" @change="handleFileSelect" />
+      <button @click="$refs.fileInput.click()">导入表格</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import html2canvas from 'html2canvas'
+import { ref, reactive, computed, onMounted } from 'vue'
 
-// 座位数据
-const seatingData = ref({})
-const draggedSeat = ref(null)
+// 1. 数据
+const names = ref([])
+const seatingData = reactive({})
+const dragging = ref(null)
+const dragOver = ref(null)
+const fileInput = ref(null)
 
-// 模拟学生数据
-const students = [
-  '张三', '李四', '王五', '赵六', '钱七', '孙八',
-  '周九', '吴十', '郑十一', '王十二', '李十三', '赵十四',
-  '钱十五', '孙十六', '周十七', '吴十八', '郑十九', '王二十',
-  '李二十一', '赵二十二', '钱二十三', '孙二十四'
-]
+// 2. 工具函数
+function seatKey(row, col) {
+  return `${row}-${col}`
+}
+function getSeatName(row, col) {
+  return seatingData[seatKey(row, col)] || ''
+}
+const studentCount = computed(() => {
+  return Object.values(seatingData).filter(name => name).length
+})
 
-// 获取座位信息
-const getSeatInfo = (row, col) => {
-  const key = `${row}-${col}`
-  return seatingData.value[key] || {}
+// 3. 拖拽/触摸
+function isDragging(row, col) {
+  return dragging.value && dragging.value.key === seatKey(row, col)
+}
+function isDragOver(row, col) {
+  return dragOver.value && dragOver.value.key === seatKey(row, col)
+}
+function handleDragStart(row, col) {
+  dragging.value = { row, col, key: seatKey(row, col) }
+}
+function handleDragEnd() {
+  dragging.value = null
+  dragOver.value = null
+}
+function handleDragOver(row, col) {
+  dragOver.value = { row, col, key: seatKey(row, col) }
+}
+function handleDrop(row, col) {
+  if (!dragging.value || dragging.value.key === seatKey(row, col)) return
+  swapSeats(dragging.value.row, dragging.value.col, row, col)
+  createFirework()
+  handleDragEnd()
 }
 
-// 拖拽开始
-const handleDragStart = (event, row, col) => {
-  draggedSeat.value = { row, col }
-  event.target.classList.add('dragging')
+// 触摸事件
+let touchDragging = null
+function handleTouchStart(e, row, col) {
+  touchDragging = { row, col }
 }
-
-// 拖拽结束处理
-const handleDrop = (event, targetRow, targetCol) => {
-  event.preventDefault()
-  const elements = document.querySelectorAll('.dragging')
-  elements.forEach(el => el.classList.remove('dragging'))
-
-  if (!draggedSeat.value) return
-
-  const sourceKey = `${draggedSeat.value.row}-${draggedSeat.value.col}`
-  const targetKey = `${targetRow}-${targetCol}`
-
-  // 交换座位信息
-  const temp = { ...seatingData.value[targetKey] }
-  seatingData.value[targetKey] = seatingData.value[sourceKey]
-  seatingData.value[sourceKey] = temp
-
-  draggedSeat.value = null
+function handleTouchMove(e) {
+  // 可选：高亮目标座位
 }
-
-// 清空座位
-const clearSeats = () => {
-  seatingData.value = {}
-}
-
-// 随机分配
-const randomAssign = () => {
-  const shuffledStudents = [...students].sort(() => Math.random() - 0.5)
-  let studentIndex = 0
-
-  seatingData.value = {}
-  for (let row = 1; row <= 6; row++) {
-    for (let col = 1; col <= 8; col++) {
-      if (studentIndex < shuffledStudents.length) {
-        seatingData.value[`${row}-${col}`] = { name: shuffledStudents[studentIndex] }
-        studentIndex++
-      }
+function handleTouchEnd(e) {
+  const touch = e.changedTouches[0]
+  const el = document.elementFromPoint(touch.clientX, touch.clientY)
+  if (el && el.classList.contains('seat')) {
+    const row = Number(el.dataset.row)
+    const col = Number(el.dataset.col)
+    if (touchDragging && (touchDragging.row !== row || touchDragging.col !== col)) {
+      swapSeats(touchDragging.row, touchDragging.col, row, col)
+      createFirework()
     }
   }
+  touchDragging = null
 }
 
-// 截图保存
-const saveScreenshot = async () => {
-  const element = document.querySelector('.seating-container')
-  const canvas = await html2canvas(element)
-  const link = document.createElement('a')
-  link.download = '座位表.png'
-  link.href = canvas.toDataURL()
-  link.click()
+// 4. 交换座位
+function swapSeats(row1, col1, row2, col2) {
+  const k1 = seatKey(row1, col1)
+  const k2 = seatKey(row2, col2)
+  const temp = seatingData[k1]
+  seatingData[k1] = seatingData[k2]
+  seatingData[k2] = temp
 }
 
-// 保存到本地存储
-const saveToLocal = () => {
-  localStorage.setItem('seatingData', JSON.stringify(seatingData.value))
-}
-
-// 从本地存储加载数据
-onMounted(() => {
-  const savedData = localStorage.getItem('seatingData')
-  if (savedData) {
-    seatingData.value = JSON.parse(savedData)
+// 5. 分配/清空
+function clearSeats() {
+  for (let row = 1; row <= 8; row++) {
+    for (let col = 1; col <= 8; col++) {
+      seatingData[seatKey(row, col)] = ''
+    }
   }
+  localStorage.removeItem('classSeating')
+}
+function randomAssign() {
+  const shuffled = [...names.value].sort(() => Math.random() - 0.5)
+  let idx = 0
+  for (let row = 1; row <= 8; row++) {
+    for (let col = 1; col <= 8; col++) {
+      seatingData[seatKey(row, col)] = shuffled[idx++] || ''
+    }
+  }
+  createFirework()
+}
+function sequentialAssign() {
+  let idx = 0
+  for (let row = 1; row <= 8; row++) {
+    for (let col = 1; col <= 8; col++) {
+      seatingData[seatKey(row, col)] = names.value[idx++] || ''
+    }
+  }
+  createFirework()
+}
+
+// 6. 烟花特效
+function createFirework(x = window.innerWidth / 2, y = window.innerHeight / 2) {
+  const colors = ['#FFB6C1', '#87CEEB', '#DDA0DD']
+  const firework = document.createElement('div')
+  firework.className = 'firework'
+  firework.style.left = x + 'px'
+  firework.style.top = y + 'px'
+  firework.style.background = colors[Math.floor(Math.random() * colors.length)]
+  document.body.appendChild(firework)
+  setTimeout(() => firework.remove(), 800)
+}
+
+// 7. 截图
+function saveAsImage() {
+  import('html2canvas').then(({ default: html2canvas }) => {
+    const buttons = document.querySelector('.buttons')
+    buttons.style.display = 'none'
+    html2canvas(document.body).then(canvas => {
+      const link = document.createElement('a')
+      link.download = '班级座位表.png'
+      link.href = canvas.toDataURL()
+      link.click()
+      buttons.style.display = 'flex'
+    })
+  })
+}
+
+// 8. 本地存储
+function saveToLocalStorage() {
+  const arr = []
+  for (let row = 1; row <= 8; row++) {
+    for (let col = 1; col <= 8; col++) {
+      arr.push({ row, col, name: seatingData[seatKey(row, col)] })
+    }
+  }
+  localStorage.setItem('classSeating', JSON.stringify(arr))
+  createFirework()
+}
+function loadFromLocalStorage() {
+  const saved = localStorage.getItem('classSeating')
+  if (saved) {
+    const arr = JSON.parse(saved)
+    arr.forEach(item => {
+      seatingData[seatKey(item.row, item.col)] = item.name
+    })
+  }
+}
+
+// 9. 导入 Excel
+async function handleFileSelect(e) {
+  const file = e.target.files[0]
+  if (!file) return
+  const XLSX = await import('xlsx')
+  const data = await file.arrayBuffer()
+  const workbook = XLSX.read(new Uint8Array(data), { type: 'array' })
+  const firstSheet = workbook.Sheets[workbook.SheetNames[0]]
+  const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 })
+  // 取第3列（索引2），跳过前两行
+  const newNames = jsonData.slice(2).map(row => row[2]).filter(Boolean)
+  names.value = newNames
+  sequentialAssign()
+}
+
+// 10. 初始化
+onMounted(() => {
+  // 初始化座位
+  for (let row = 1; row <= 8; row++) {
+    for (let col = 1; col <= 8; col++) {
+      seatingData[seatKey(row, col)] = ''
+    }
+  }
+  loadFromLocalStorage()
 })
 </script>
 
 <style scoped>
-:root {
-  --primary-color: #FFB6C1;
-  --secondary-color: #87CEEB;
-  --accent-color: #FFD700;
-  --background-start: #FFF0F5;
-  --background-end: #E6E6FA;
-  --seat-bg: rgba(255, 255, 255, 0.85);
-  --shadow-color: rgba(0, 0, 0, 0.1);
-}
-
-.seating-container {
-  padding: 2rem;
+.seating-bg {
   min-height: 100vh;
-  background: #fff;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-family: 'Comic Sans MS', '华文彩云', sans-serif;
-  color: #333;
-  text-shadow: 2px 2px 4px var(--shadow-color);
-  font-size: 2.5rem;
-}
-
-.seating-grid {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.seat-row {
-  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 2rem;
+  background: linear-gradient(135deg, #FFB6C1, #87CEEB, #DDA0DD);
+  font-family: "Microsoft YaHei", "YouYuan", sans-serif;
+  color: #333;
 }
 
-.seat-group {
+.seating-bg h1 {
+  font-family: "Comic Sans MS", "华文彩云", cursive;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  color: #fff;
+}
+
+.seating-bg .student {
+  font-size: 1.2em;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  color: #fff;
+  height: 30px;
+  margin-top: 55px;
+  margin-left: 20px;
+}
+
+.seating-bg .classroom {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
-.seat {
-  width: 120px;
-  height: 120px;
-  background: var(--seat-bg);
-  border-radius: 15px;
-  box-shadow: 0 4px 8px var(--shadow-color);
-  transition: all 0.3s ease;
-  cursor: move;
+.seating-bg .row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.seating-bg .group {
+  display: flex;
+  gap: 5px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.seating-bg .group + .group {
+  margin-left: 15px;
+}
+
+.seating-bg .seat {
+  width: 82.5px;
+  height: 60.5px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  cursor: move;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.seat:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px var(--shadow-color);
+.seating-bg .seat p {
+  margin: 5px 0;
+  font-size: 12px;
 }
 
-.seat.dragging {
-  opacity: 0.5;
-  transform: scale(0.95);
-}
-
-.seat-content {
-  text-align: center;
-}
-
-.seat-position {
-  font-size: 0.9rem;
+.seating-bg .position {
+  font-size: 13px;
   color: #666;
-  margin-bottom: 0.5rem;
 }
 
-.student-name {
-  font-family: '微软雅黑', '幼圆', sans-serif;
-  font-size: 1.1rem;
-  color: #333;
+.seating-bg .seat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
-.control-panel {
+.seating-bg .seat.drag-over {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border: 2px dashed #FFB6C1;
+}
+
+.seating-bg .seat.dragging {
+  opacity: 0.8;
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.seating-bg .name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.seating-bg .buttons {
+  margin-top: 20px;
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 15px;
 }
 
-.control-btn {
-  padding: 0.8rem 1.5rem;
+.seating-bg button {
+  padding: 12px 24px;
   border: none;
-  border-radius: 25px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 8px;
+  background: linear-gradient(135deg, #FFB6C1, #87CEEB);
   color: white;
-  font-family: '微软雅黑', sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px var(--shadow-color);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.control-btn:hover {
+.seating-bg button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--shadow-color);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-.control-btn:active {
+.seating-bg button:active {
   transform: translateY(1px);
 }
 
-@media (max-width: 1200px) {
-  .seat {
-    width: 100px;
-    height: 100px;
+@media (max-width: 768px) {
+  .seating-bg .classroom {
+    transform: scale(0.8);
   }
-  
-  .seat-row {
-    gap: 1rem;
+  .seating-bg .buttons {
+    flex-direction: column;
   }
 }
 
-@media (max-width: 768px) {
-  .seat {
-    width: 80px;
-    height: 80px;
+.seating-bg .firework {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: explode 0.8s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
-  .student-name {
-    font-size: 0.9rem;
-  }
-  
-  .control-panel {
-    flex-wrap: wrap;
+  100% {
+    transform: scale(20);
+    opacity: 0;
   }
 }
 </style>
