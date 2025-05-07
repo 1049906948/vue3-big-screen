@@ -49,11 +49,15 @@
       <input type="file" ref="fileInput" accept=".csv,.xlsx,.xls" style="display: none" @change="handleFileSelect" />
       <button @click="$refs.fileInput.click()">导入表格</button>
     </div>
+    <div v-if="loading" class="import-loading">
+      <div class="spinner"></div>
+      <div>正在导入，请稍候...</div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 
 // 1. 数据
 const names = ref([])
@@ -61,6 +65,7 @@ const seatingData = reactive({})
 const dragging = ref(null)
 const dragOver = ref(null)
 const fileInput = ref(null)
+const loading = ref(false)
 
 // 2. 工具函数
 function seatKey(row, col) {
@@ -173,13 +178,44 @@ function createFirework(x = window.innerWidth / 2, y = window.innerHeight / 2) {
 function saveAsImage() {
   import('html2canvas').then(({ default: html2canvas }) => {
     const buttons = document.querySelector('.buttons')
-    buttons.style.display = 'none'
-    html2canvas(document.body).then(canvas => {
+    const seatingBg = document.querySelector('.seating-bg')
+    const classroom = document.querySelector('.classroom')
+    // 记录原样式
+    const oldClassroomBg = classroom.style.background
+    const oldClassroomFilter = classroom.style.backdropFilter
+    const oldClassroomBoxShadow = classroom.style.boxShadow
+    const oldCardBg = []
+    const oldCardBoxShadow = []
+    const cards = classroom.querySelectorAll('.seat')
+    cards.forEach(card => {
+      oldCardBg.push(card.style.background)
+      oldCardBoxShadow.push(card.style.boxShadow)
+      // 统一卡片背景和阴影为淡蓝色
+      card.style.background = '#e3f6fd'
+      card.style.boxShadow = '0 2px 8px rgba(0,0,0,0.10)'
+    })
+    // 临时设置classroom背景为淡蓝色
+    classroom.style.background = 'rgba(227,246,253,0.95)'
+    classroom.style.backdropFilter = 'none'
+    classroom.style.boxShadow = '0 8px 32px 0 rgba(31, 38, 135, 0.18)'
+    // 隐藏按钮但不影响布局
+    buttons.style.opacity = '0'
+    buttons.style.pointerEvents = 'none'
+    html2canvas(seatingBg, { backgroundColor: null, useCORS: true }).then(canvas => {
       const link = document.createElement('a')
       link.download = '班级座位表.png'
       link.href = canvas.toDataURL()
       link.click()
-      buttons.style.display = 'flex'
+      // 恢复样式
+      buttons.style.opacity = '1'
+      buttons.style.pointerEvents = ''
+      classroom.style.background = oldClassroomBg
+      classroom.style.backdropFilter = oldClassroomFilter
+      classroom.style.boxShadow = oldClassroomBoxShadow
+      cards.forEach((card, i) => {
+        card.style.background = oldCardBg[i]
+        card.style.boxShadow = oldCardBoxShadow[i]
+      })
     })
   })
 }
@@ -207,17 +243,23 @@ function loadFromLocalStorage() {
 
 // 9. 导入 Excel
 async function handleFileSelect(e) {
-  const file = e.target.files[0]
-  if (!file) return
-  const XLSX = await import('xlsx')
-  const data = await file.arrayBuffer()
-  const workbook = XLSX.read(new Uint8Array(data), { type: 'array' })
-  const firstSheet = workbook.Sheets[workbook.SheetNames[0]]
-  const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 })
-  // 取第3列（索引2），跳过前两行
-  const newNames = jsonData.slice(2).map(row => row[2]).filter(Boolean)
-  names.value = newNames
-  sequentialAssign()
+  loading.value = true
+  await nextTick() // 确保 loading 遮罩渲染出来
+  try {
+    const file = e.target.files[0]
+    if (!file) return
+    const XLSX = await import('xlsx')
+    const data = await file.arrayBuffer()
+    const workbook = XLSX.read(new Uint8Array(data), { type: 'array' })
+    const firstSheet = workbook.Sheets[workbook.SheetNames[0]]
+    const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 })
+    // 取第3列（索引2），跳过前两行
+    const newNames = jsonData.slice(2).map(row => row[2]).filter(Boolean)
+    names.value = newNames
+    sequentialAssign()
+  } finally {
+    loading.value = false
+  }
 }
 
 // 10. 初始化
@@ -390,5 +432,31 @@ onMounted(() => {
     transform: scale(20);
     opacity: 0;
   }
+}
+
+.import-loading {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.7);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #333;
+}
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #FFB6C1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
 }
 </style>
