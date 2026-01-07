@@ -120,7 +120,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/seating",
     name: "seating",
     component: () => import("@/views/seating/index.vue"),
-  }
+  },
+  {
+    path: "/innopara",
+    name: "innopara",
+    component: () => import("@/views/innopara/index.vue"),
+  },
 ];
 
 const router = createRouter({

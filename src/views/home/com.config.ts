@@ -87,4 +87,8 @@ export const data = [
     url: "/seating",
     name: "seating",
   },
+  {
+    url: "/innopara",
+    name: "innopara",
+  },
 ];
